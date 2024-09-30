@@ -27,3 +27,31 @@ Thumbs.db
 
 package-lock.json
 yarn.lock
+
+# Jest 테스트 관련 파일
+/coverage/
+/jest-cache/
+/jest-config/
+/jest-report.xml
+
+# 빌드 결과물
+/build/
+/out/
+/dist/
+
+# PWA 관련 파일
+/service-worker.js
+/precache-manifest*.js
+
+# 환경 파일
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 임시 파일
+.tmp/
+*.log
+
+# Editor 설정 관련 파일
+.eslintcache

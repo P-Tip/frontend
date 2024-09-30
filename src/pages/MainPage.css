@@ -1,0 +1,26 @@
+/* MainPage.css */
+
+/* 메인 페이지 전체 컨테이너 */
+.container {
+    max-width: 600px;  /* 페이지의 최대 너비 */
+    margin: 0 auto;     /* 중앙 정렬 */
+    padding: 20px;      /* 위아래 패딩 */
+  }
+  .widget-gap {
+    height: 10px; 
+  }
+  
+  /* 한줄 문장 스타일 */
+  .main-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: left;
+  }
+  
+  /* 위젯 컨테이너 */
+  .widget-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
