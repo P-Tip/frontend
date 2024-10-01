@@ -1,19 +1,19 @@
 import React from 'react';
+import Icon from './Icon'; // Icon 컴포넌트 import
 import './Header.css';
-import { FaHome, FaBell, FaUser } from 'react-icons/fa'; // 예시 아이콘들
 
 const Header: React.FC = () => {
   return (
     <header className="header">
       {/* 왼쪽에 큰 아이콘 */}
       <div className="header-left">
-        <FaHome data-testid="large-icon" className="header-icon large-icon" />
+        <Icon type="home" size="large" />
       </div>
 
       {/* 오른쪽에 두 개의 작은 아이콘 */}
       <div className="header-right">
-        <FaBell data-testid="small-icon" className="header-icon small-icon" />
-        <FaUser data-testid="small-icon" className="header-icon small-icon" />
+        <Icon type="bell" size="small" />
+        <Icon type="user" size="small" />
       </div>
     </header>
   );
