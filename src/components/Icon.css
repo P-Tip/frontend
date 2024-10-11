@@ -8,17 +8,17 @@
     transform: scale(1.1); /* 호버 시 아이콘 크기 약간 확대 */
   }
   
-  /* large 아이콘 크기 */
+
   .icon-large {
     font-size: 32px;
   }
   
-  /* small 아이콘 크기 */
+
   .icon-small {
     font-size: 24px;
   }
   
-  /* 아이콘 색상 */
+  
   .icon-black {
     color: black;
   }
@@ -27,7 +27,7 @@
     color: white;
   }
   
-  /* 투명 버튼 스타일 */
+  /* 투명 버튼 */
   .transparent-button {
     background-color: transparent;
     border: none;

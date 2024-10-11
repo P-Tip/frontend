@@ -10,7 +10,7 @@ const MainPage: React.FC = () => {
       <Header />
 
       {/* 한줄 문장 */}
-      <p className="main-text">P-tip에 오신걸 환영합니다.</p>
+      <p className="main-text">영차영차q(≧▽≦q)체육대회</p>
 
       {/*정사각형 위젯 */}
       <div className="widget-container">

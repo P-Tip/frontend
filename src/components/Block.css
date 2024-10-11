@@ -1,8 +1,8 @@
 .block-square {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  background-color: #808080;
-  border-radius: 20px;
+  aspect-ratio: 134.93 / 129;
+  background-color: #ffffff;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,8 +13,8 @@
 
 .block-rectangle {
   width: 100%;
-  aspect-ratio: 319.2 / 365; /* 가로 세로 비율 */
-  background-color: #808080;
+  aspect-ratio: 280 / 250; /* 가로 세로 비율 */
+  background-color: #ffffff;
   border-radius: 20px;
   display: flex;
   align-items: center;

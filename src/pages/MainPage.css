@@ -2,6 +2,7 @@
 
 /* 메인 페이지 전체 컨테이너 */
 .container {
+  background-color:#f8f8f8;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -10,13 +11,13 @@
 }
 
 .widget-gap {
-  height: 10px; 
+  height: 15px; 
 }
 
   /* 한줄 문장 스타일 */
   .main-text {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 15pt;
+    margin-bottom: 15px;
     color: #333;
     text-align: left;
   }
