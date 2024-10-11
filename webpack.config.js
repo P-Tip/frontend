@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  // 프로젝트 진입점 설정 (index.tsx 파일이 시작점)
+  // 프로젝트 진입점 설정 
   entry: './src/index.tsx',
 
   // 빌드 결과물 설정 (dist 폴더에 번들링된 파일 생성)
