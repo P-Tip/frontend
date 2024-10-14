@@ -1,7 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Block from '../components/Block';
+import PointBlock from '../components/MainPageComponents/PointBlock';
+import MenuBlock from '../components/MainPageComponents/MenuBlock';
+import TodoBlock from '../components/MainPageComponents/TodoBlock';
 import './MainPage.css';
 
 const MainPage: React.FC = () => {
@@ -12,15 +14,15 @@ const MainPage: React.FC = () => {
       {/* 한줄 문장 */}
       <p className="main-text">영차영차q(≧▽≦q)체육대회</p>
 
-      {/*정사각형 위젯 */}
+      {/* 정사각형 위젯 */}
       <div className="widget-container">
-        <Block content="솔선수범 장학금" isSquare={true} />
-        <Block content="학식 메뉴" isSquare={true} />
+        <PointBlock />
+        <MenuBlock />
       </div>
       <div className="widget-gap"></div>
 
-      {/*직사각형 위젯 */}
-      <Block content="시간표" />
+      {/* 직사각형 위젯 */}
+      <TodoBlock />
       <div className="widget-gap"></div>
 
       <Footer />
