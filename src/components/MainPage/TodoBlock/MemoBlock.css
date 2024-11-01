@@ -1,0 +1,40 @@
+.memo-section {
+    background-color: #f8f8f8;
+}
+
+.memo-header {
+    display: flex;
+    align-items: center;
+}
+
+.memo-header h3 {
+    font-size:8px;
+    color: black;
+    margin-right: 8px;
+}
+
+.line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: black;
+}
+
+.memo-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #b7b7b7; 
+    border-radius: 50px;
+    margin-left:38px;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.memo-item span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.35em;
+    padding: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

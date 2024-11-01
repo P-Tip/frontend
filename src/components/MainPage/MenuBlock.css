@@ -1,0 +1,23 @@
+
+.Menublock-text {
+  font-size: 0.8rem;
+  margin: 0.2px 0;
+  overflow: hidden;
+  white-space: normal; 
+  text-align: center;
+}
+
+.first-text {
+  font-size: 0.9rem; 
+  font-weight: bold; 
+  margin-bottom: 6px;
+}
+@media (min-width: 420px) {
+    .Menublock-text {
+      font-size: clamp(0.8rem, 3.3vw, 1.5rem); 
+    }
+    
+    .first-text {
+      font-size: clamp(0.9rem, 3.8vw, 1.8rem); 
+    }
+  }

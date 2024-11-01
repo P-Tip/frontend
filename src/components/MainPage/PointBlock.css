@@ -1,0 +1,45 @@
+.Pointblock-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.gauge-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-top: -10px;
+}
+
+.gauge-bar-fill {
+    height: 100%;
+    background-color: #117554;
+    width: 0;
+    transition: width 1s ease;
+    display: flex;
+    align-items: center; /*수직 중앙*/
+    justify-content: center; /*수평 중앙*/
+}
+
+.gauge-bar-score {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+@media (min-width: 420px) {
+    .Pointblock-text{
+        font-size: clamp(0.9rem, 3.3vw, 1.5rem);
+    }
+    .gauge-bar{
+        height: clamp(18px,4.0vh,40px);
+    }
+    .gauge-bar-score{
+        font-size: clamp(1.2rem, 3.7vw, 1.9rem);
+    }
+}

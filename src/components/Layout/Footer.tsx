@@ -1,5 +1,6 @@
+// components/layout/Footer.tsx
 import React from 'react';
-import Icon from './Icon';
+import Icon from '../Icon/Icon';
 import './Footer.css';
 
 const Footer: React.FC = () => {
