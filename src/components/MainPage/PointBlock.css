@@ -3,8 +3,6 @@
     font-weight: bold;
     margin-top: 0.1rem;
     margin-bottom: 1rem;
-    overflow: hidden;
-    white-space: normal;
     text-align: center;
 }
 
@@ -24,8 +22,8 @@
     width: 0;
     transition: width 1s ease;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /*수직 중앙*/
+    justify-content: center; /*수평 중앙*/
 }
 
 .gauge-bar-score {

@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import PointBlock from '../components/MainPageComponents/PointBlock';
-import MenuBlock from '../components/MainPageComponents/MenuBlock';
-import TodoBlock from '../components/MainPageComponents/TodoBlock';
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
+import PointBlock from '../components/MainPage/PointBlock';
+import MenuBlock from '../components/MainPage/MenuBlock';
+import TodoBlock from '../components/MainPage/TodoBlock';
 import './MainPage.css';
 
 const MainPage: React.FC = () => {
