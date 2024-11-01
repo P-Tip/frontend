@@ -1,0 +1,43 @@
+.lesson-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* LessonBlock이 독립적으로 정렬 */
+  aspect-ratio: 299.2 / 140.6; /* 고정된 비율을 사용 */
+  width: 100%;
+  gap: 30px;
+  margin-top: 3px;
+}
+.lesson-left, .lesson-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 두 개의 LessonBlock을 수평으로 배치 */
+  grid-gap: 3px;
+  width: 48%; /* 좌우 공간이 절반씩 차지하도록 설정 */
+}
+
+.todoblock-text {
+  font-size: 1.0rem;
+  font-weight: bold;
+  margin: -2px 0;
+  margin-left: 5px; 
+}
+
+.memo-container{
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+@media (min-width: 420px){
+  .Todoblock-text{
+    font-size: clamp(1.0rem, 3.4vw, 1.6rem);
+  }
+}

@@ -25,7 +25,6 @@ Thumbs.db
 
 /sw.js
 
-package-lock.json
 yarn.lock
 
 # Jest 테스트 관련 파일

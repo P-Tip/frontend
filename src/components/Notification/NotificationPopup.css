@@ -1,0 +1,60 @@
+/* NotificationPopup.css */
+.notification-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end; /* 아래에서 시작 */
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .popup-content {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 12px 12px 0 0; /* 위쪽 둥글게 */
+    padding: 20px;
+    z-index: 1001;
+    transform: translateY(100%); /* 시작 위치를 아래로 */
+    animation: slideUp 0.2s ease-out forwards; /* 슬라이드 애니메이션 */
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .popup-body {
+    margin-top: 10px;
+  }
+  

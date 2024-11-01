@@ -1,0 +1,23 @@
+.block-square, .block-rectangle {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-start; /* 텍스트를 위쪽부터 정렬 */
+  color: black;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  overflow: hidden; /* 텍스트가 넘치지 않도록 */
+  box-sizing: border-box; /* 패딩과 보더를 크기 안에 포함 */
+  flex-direction: column;
+}
+
+.block-rectangle {
+  aspect-ratio: 280 / 265; /* 직사각형 위젯의 비율 고정 */
+  padding-right: 10px; /* 오른쪽 패딩 명시적으로 설정 */
+  border-radius: 20px;
+}
+
+.block-square {
+  aspect-ratio: 134.93 / 129; /* 정사각형 위젯의 비율 고정 */
+  border-radius: 30px;
+}
