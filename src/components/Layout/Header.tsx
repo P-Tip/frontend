@@ -1,7 +1,7 @@
 // components/layout/Header.tsx
 import React, { useState } from 'react';
 import Icon from '../Icon/Icon';
-import NotificationPopup from '../notification/NotificationPopup';
+import NotificationPopup from '../Notification/NotificationPopup';
 import './Header.css';
 
 const Header: React.FC = () => {
