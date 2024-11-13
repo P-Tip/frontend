@@ -1,0 +1,49 @@
+/* ScholarshipList.css */
+  
+.title-container {
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 수직 중앙 정렬 추가 */
+  height: 10%;
+  margin-bottom: -0.8rem;
+}
+
+.title-container p {
+  margin: 0; /* 여백 제거 */
+  display: flex;
+  align-items: center; /* 텍스트 수직 중앙 정렬 */
+}
+  
+.sort-button-container {
+  display: flex;
+  justify-content: space-between; /* 왼쪽과 오른쪽 끝에 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.sort-date {
+  font-size: 0.7rem;
+  color: #b7b7b7;
+}
+
+.sort-button {
+  font-size: 0.7rem;
+  color: #b7b7b7;
+  background-color: #FFFFFF; /* 원하는 배경색으로 변경 */
+  border: 1px solid #ffffff; 
+  cursor: pointer;
+}
+
+.sort-button:hover {
+  background-color: #e0e0e0; /* 마우스를 올렸을 때의 배경색 */
+}
+
+  
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* 카드 사이의 간격 */
+  }  

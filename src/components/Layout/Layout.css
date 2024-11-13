@@ -4,12 +4,12 @@
     flex-direction: column;
     height: 100vh; /* 전체 화면 높이를 차지 */
     box-sizing: border-box;
+    background-color: #f8f8f8;
   }
   
   .main-content {
     flex: 1; /* 남은 공간을 차지 */
-    padding: 20px; /* 메인 콘텐츠 패딩 */
+    height: 100%;
     overflow-y: auto; /* 콘텐츠가 많을 경우 스크롤 활성화 */
-    padding-bottom: 80px; /* Footer를 고려한 여백 */
   }
   

@@ -1,0 +1,28 @@
+.block-search {
+  position: relative; /* 아이콘이 입력란 내부에 위치할 수 있도록 함 */
+  display: flex;
+  align-items: flex-start; 
+  justify-content: center;
+  padding-left: 0.8rem;
+}
+
+.scholarship-search .search-input {
+  width: 85%;
+  height: 2.5rem;
+  padding-left: 0.6rem;
+  padding-right: 2.5rem; /* 아이콘이 들어갈 여백 */
+  border-radius: 8px;
+  border: 1px solid var(--color-input);
+  background-color: #F8F8F8;
+}
+
+.search-icon {
+  position: absolute;
+  right: 1rem; /* 입력란 안쪽에 위치하도록 조정 */
+  top: 50%;
+  transform: translateY(-50%); /* 수직 가운데 정렬 */
+  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-muted-foreground);
+}

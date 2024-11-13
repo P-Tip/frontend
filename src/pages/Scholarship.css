@@ -1,0 +1,12 @@
+/* Scholarship.css */
+.scholarship-container {
+  max-width: 768px;
+  margin: 0 auto;
+  background-color: var(--color-background);
+}
+  
+.content-wrapper {
+  padding: 1rem;
+  gap: 1rem;
+}
+  

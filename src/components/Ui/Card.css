@@ -1,0 +1,92 @@
+/* Card.css */
+
+/* 공통 카드 스타일 */
+.card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent; /* 배경색과 같게 설정 */
+    border-radius: 16px; /* 전체 카드 모서리를 더 둥글게 */
+    overflow: hidden;
+    width: 100%; /* 부모 크기에 맞추기 */
+    box-shadow: none; /* 그림자 제거 */
+  }
+  
+  /* ScholarshipCard 관련 스타일 */
+  .scholarship-card {
+    width: 100%;
+    margin-top: -0.5rem;
+    background-color: #ffffff; /* 카드 배경색을 흰색으로 설정 */
+  }
+  
+  
+  .scholarship-header {
+    aspect-ratio: 219/65;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem;
+    flex-grow: 1;
+    background-color: #f8f8f8; 
+    border-radius: 16px; 
+    box-shadow: 2px 4px 8px rgba(0, 0.1, 0.1, 0.15);
+  }
+  
+  .scholarship-logo {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .logo-image {
+    border-radius: 50%;
+  }
+  
+  .scholarship-date {
+    font-size: 0.75rem;
+    color: #888888;
+  }
+  
+  .scholarship-title {
+    margin-top: 0rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+  }
+  
+  .scholarship-subtitle {
+    font-size: 0.75rem;
+    color: #888888;
+    margin-bottom: 2px;
+  }
+  
+  .scholarship-amount {
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  
+  /* 담기 버튼 */
+  .scholarship-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13%;
+    height: 100%;
+    font-size: 0.75rem;
+    color: white;
+    background-color: #A3D3C3;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #C8E6C9; /* 테두리 추가 */
+    box-shadow: 2px 4px 8px rgba(0, 0.1, 0.1, 0.15);
+  }
+  
+  .scholarship-button:hover {
+    background-color: #C8E6C9;
+    border-color: #A5D6A7; /* 호버 시 테두리 색상 변경 */
+  }  

@@ -1,17 +1,33 @@
+.main-menu {
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 텍스트를 중앙에 정렬 */
+  text-align: center; /* 텍스트가 블럭 안에서 중앙에 정렬되도록 */
+}
+.menu-item {
+  font-size: 0.85rem;
+  margin: 2px 0; /* 메뉴 간 간격을 줘서 더 보기 좋게 정렬 */
+  color: #333333;
+}
 
-.Menublock-text {
-  font-size: 0.8rem;
-  margin: 0.2px 0;
+.menublock-text {
+  font-size: 0.75rem; /* 폰트 크기 조정 */
   overflow: hidden;
-  white-space: normal; 
+  white-space: pre-line; /* 여러 줄로 표시 */
   text-align: center;
+  margin: 0;
+  color: #666666; /* 글자 색상 조정 */
 }
 
 .first-text {
-  font-size: 0.9rem; 
+  font-size: 0.85rem; 
   font-weight: bold; 
   margin-bottom: 6px;
+  color: #333333; /* 날짜와 식사 종류를 강조 */
 }
+
 @media (min-width: 420px) {
     .Menublock-text {
       font-size: clamp(0.8rem, 3.3vw, 1.5rem); 

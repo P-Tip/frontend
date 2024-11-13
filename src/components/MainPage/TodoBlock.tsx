@@ -1,11 +1,11 @@
 import React from 'react';
-import './BaseBlock.css';
+import '../Layout/BaseBlock.css';
 import './TodoBlock.css';
 import { LessonBlock } from './TodoBlock/LessonBlock';
 import MemoBlock from './TodoBlock/MemoBlock'; 
 
 const TodoBlock: React.FC = () => (
-  <div className="block-rectangle">
+  <div className="block-ToDo">
     <p className="todoblock-text">
       To Do
     </p>

@@ -54,3 +54,5 @@ yarn.lock
 
 # Editor 설정 관련 파일
 .eslintcache
+
+.next/

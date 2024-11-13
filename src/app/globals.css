@@ -1,0 +1,91 @@
+/* src/styles/global.css */
+
+/* 아이콘 공통 스타일 */
+.icon {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .icon:hover {
+    transform: scale(1.1); /* 호버 시 아이콘 크기 약간 확대 */
+  }
+  
+  .icon-large {
+    font-size: 32px;
+  }
+  
+  .icon-small {
+    font-size: 24px;
+  }
+  
+  .icon-black {
+    color: black;
+  }
+  
+  .icon-white {
+    color: white;
+  }
+  
+  /* 투명 버튼 */
+  .transparent-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .transparent-button:focus {
+    outline: none; /* 포커스 시 outline 제거 */
+  }  
+
+/* globals.css */
+:root {
+  --gauge-bar-height: 18px;
+  --gauge-bar-color: #117554;
+  --gauge-bar-bg: #e0e0e0;
+}
+
+/* 공통 게이지 바 스타일 */
+.gauge-bar {
+  width: 100%;
+  height: var(--gauge-bar-height);
+  background-color: var(--gauge-bar-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-top: -10px;
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  background-color: var(--gauge-bar-color);
+  width: 0;
+  transition: width 1s ease;
+  display: flex;
+  align-items: center; /* 수직 중앙 */
+  justify-content: center; /* 수평 중앙 */
+}
+
+.gauge-bar-score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: left;
+}
+.total-score {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 5px;
+  color: #555;
+}
+
+@media (min-width: 420px) {
+  .gauge-bar {
+      height: clamp(18px, 4.0vh, 40px);
+  }
+  .gauge-bar-score {
+      font-size: clamp(1.2rem, 3.7vw, 1.9rem);
+  }
+}

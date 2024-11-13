@@ -1,0 +1,86 @@
+.block-square, 
+.block-ToDo,
+.block-search,
+.block-point,
+.block-scholarship,
+.tag,
+.price-min,
+.price-max,
+.department-item
+{
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-start; /* 텍스트를 위쪽부터 정렬 */
+  color: black;
+  box-shadow: 2px 4px 8px rgba(0, 0.1, 0.1, 0.15);
+  padding: 10px;
+  overflow: hidden; /* 텍스트가 넘치지 않도록 */
+  box-sizing: border-box; /* 패딩과 보더를 크기 안에 포함 */
+  flex-direction: column;
+}
+
+.block-square {
+  aspect-ratio: 134.93 / 129; /* 정사각형 위젯의 비율 고정 */
+  border-radius: 30px;
+}
+
+.block-ToDo {
+  aspect-ratio: 280 / 280; /* 직사각형 위젯의 비율 고정 */
+  padding-right: 10px; /* 오른쪽 패딩 명시적으로 설정 */
+  border-radius: 10px;
+}
+
+.block-search{
+  width:100%;
+  height:60px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding : 5px;
+  position: relative;
+  display: flex; /* Flexbox 사용 */
+  align-items: flex-start; /* 수직 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+}
+.block-point{
+  aspect-ratio: 280 / 100;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 0px;
+  align-items: center;     /* 수직 중앙 정렬 */
+}
+.block-scholarship{
+  aspect-ratio: 280 / 290;
+  border-radius: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: flex;
+  align-items: center; /* 아이콘과 텍스트를 수직 가운데 정렬 */
+  justify-content: space-between; /* 텍스트와 X 아이콘 사이 간격 유지 */
+  padding: 0.2rem 0.4rem; /* 태그 내부 여백 줄이기 */
+  
+  border-radius: 6px;
+  font-size: 0.8rem; 
+  color: #333;
+  
+  width: auto; 
+  height: auto;
+  max-width: 100px; 
+  flex-direction: row;
+}
+.price-min,
+.price-max
+{
+  width:80%;
+  height:80%;
+  border-radius: 10px;
+}
+.department-item {
+  aspect-ratio:250/26;
+  border-radius: 10px;
+}

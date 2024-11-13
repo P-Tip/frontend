@@ -1,6 +1,5 @@
 import React from 'react';
 import { getIconImage } from '../../utils/IconUtils';
-import './Icon.css';
 
 interface IconProps {
   type: string;

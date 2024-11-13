@@ -1,0 +1,138 @@
+/* 검색 페이지 오버레이 */
+.search-panel .search-input {
+  width: 68%; 
+  height: 2.5rem;
+  padding-left: 0.6rem;
+  padding-right: 2.5rem; /* 아이콘이 들어갈 여백 */
+  border-radius: 8px;
+  border: 1px solid var(--color-input);
+  background-color: #F8F8F8;
+}
+
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* 아이콘과 입력란 사이 간격 */
+  padding: 0.1rem; /* 원하는 여백 추가 */
+}
+
+.search-panel {
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  background: white;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.search-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.recent-searches {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-searches > span {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+
+.tag span {
+  margin-right: 0.3rem; /* 텍스트와 삭제 아이콘 사이의 간격 */
+}
+
+.tag .fa-times {
+  font-size: 0.75rem; /* 삭제 아이콘 크기 조정 */
+  color: #888;
+  cursor: pointer;
+}
+
+.price-range,
+.departments {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--Color-8, #A3D3C326);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+}
+.price-range {
+  aspect-ratio: 117/47;
+}
+
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.price-min{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alphabet-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.alphabet-buttons button {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.department-list {
+  aspect-ratio: 117/100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
