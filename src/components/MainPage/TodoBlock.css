@@ -6,7 +6,6 @@
   aspect-ratio: 253 / 94; /* 부모 컨테이너 고정 비율 설정 */
   margin-top: 3px;
 }
-
 .day-column {
   display: flex;
   flex-direction: column;
@@ -14,7 +13,6 @@
   gap: 0.18rem;
   height: 100%;
 }
-
 
 .todoblock-text {
   font-size: 1.0rem;
