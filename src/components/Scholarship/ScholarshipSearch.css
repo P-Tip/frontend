@@ -19,8 +19,6 @@
 .search-icon {
   position: absolute;
   right: 1rem; /* 입력란 안쪽에 위치하도록 조정 */
-  top: 50%;
-  transform: translateY(-50%); /* 수직 가운데 정렬 */
   cursor: pointer;
   width: 1.25rem;
   height: 1.25rem;

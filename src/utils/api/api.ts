@@ -3,11 +3,13 @@ import axios from 'axios';
 
 // Scholarship 데이터 타입
 export interface Scholarship {
+  id: string; // 각 장학금 항목의 고유 식별자
   date: string;
   title: string;
   subtitle: string;
   amount: string;
   logoSrc?: string;
+  maxPoint: number; 
 }
 
 interface SearchParams {

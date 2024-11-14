@@ -1,11 +1,20 @@
-// PointBlock.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Layout/BaseBlock.css';
 import './PointBlock.css';
-import { renderGaugeBar } from '../../utils/PointBlockUtils';
+import { renderGaugeBar, saveScoreToLocalStorage, loadScoreFromLocalStorage } from '../../utils/GaugeBarUtils';
+import { useScholarshipData } from '../../utils/ScholarshipUtils';
 
 const PointBlock: React.FC = () => {
-  const currentScore = 350000;
+  const [currentScore, setCurrentScore] = useState(() => loadScoreFromLocalStorage());
+  const { searchResults } = useScholarshipData();
+
+  useEffect(() => {
+    saveScoreToLocalStorage(currentScore);
+  }, [currentScore]);
+
+  const handleAddScore = (maxPoint: number) => {
+    setCurrentScore((prevScore) => prevScore + maxPoint);
+  };
 
   return (
     <div className="block-square">
@@ -14,7 +23,7 @@ const PointBlock: React.FC = () => {
         gaugeBarClass: "gauge-bar",
         gaugeBarFillClass: "gauge-bar-fill",
         gaugeBarScoreClass: "gauge-bar-score"
-      })} {/* 기본값 false */}
+      }, true)}
     </div>
   );
 };

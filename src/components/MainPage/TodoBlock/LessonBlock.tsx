@@ -1,21 +1,16 @@
 import React from 'react';
 import './LessonBlock.css';
-import { getLessonBlockClass, lessonData } from '../../../utils/MainPageUtils/TodoBlockUtils/LessonBlockUtils';
+import { lessonData } from '../../../utils/MainPageUtils/BlockUtils/LessonBlockUtils';
 
-interface LessonBlockProps {
-  theme: 'dark' | 'white';
-}
-
-export const LessonBlock: React.FC<LessonBlockProps> = ({ theme }) => {
-  const blockClassName = getLessonBlockClass(theme);
-
+const LessonBlock: React.FC = () => {
   return (
-    <div className={blockClassName}>
+    <div className="lesson-block">
       <p className="lesson-text lesson-name">{lessonData.name}</p>
-      <br></br>
+      <br />
       <p className="lesson-text lesson-time">{lessonData.time}</p>
       <p className="lesson-text lesson-place">{lessonData.place}</p>
     </div>
   );
 };
 
+export default LessonBlock;

@@ -1,39 +1,39 @@
+// src/components/Scholarship/SearchFilter.tsx
 import React, { useState, useEffect } from 'react';
 import "./ScholarshipSearch.css";
 import "./SearchFilter.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons'; 
 import { Search } from "lucide-react";
-import { addRecentSearch, getRecentSearches, removeRecentSearch } from "../../utils/recentSearch"; 
+import { addRecentSearch, getRecentSearches, removeRecentSearch } from "../../utils/search/recentSearch";
 
 interface SearchFilterProps {
   onClose: () => void;
-  onSearch: (name: string, minPoint?: number, department?: string) => void;
+  onSearch: (name: string | undefined, minPoint?: number, department?: string) => void; // name을 string | undefined로 설정
 }
 
 const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>(""); // 초기값을 빈 문자열로 설정
   const [minPoint, setMinPoint] = useState<number | undefined>(undefined);
   const [department, setDepartment] = useState<string | undefined>(undefined);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 최근 검색어 목록을 가져오기
     setRecentSearches(getRecentSearches());
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    onSearch(name.trim() || undefined, minPoint, department); // name이 비어있으면 undefined 전달
     if (name.trim()) {
-      onSearch(name, minPoint, department);
-      addRecentSearch(name); // 최근 검색어 추가
-      setRecentSearches(getRecentSearches()); // 업데이트된 최근 검색어 목록 가져오기
-      setName(""); // 검색 후 입력란 초기화
+      addRecentSearch(name);
+      setRecentSearches(getRecentSearches());
+      setName("");
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(); // Enter 키를 누르면 검색 실행
     }
   };
 
@@ -59,7 +59,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
             className="search-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onKeyPress={handleKeyPress} // 엔터키 입력시 검색 실행
+            onKeyDown={handleKeyPress} // onKeyPress 대신 onKeyDown 사용
           />
           <Search className="search-icon" onClick={handleSearch} />
         </div>

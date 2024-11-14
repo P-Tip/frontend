@@ -1,6 +1,6 @@
 import React from "react";
 import "./MemoBlock.css";
-import { renderMemoSection, getThisWeekMemos, getNextWeekMemos } from "../../../utils/MainPageUtils/TodoBlockUtils/MemoBlockUtils";
+import { renderMemoSection, getThisWeekMemos, getNextWeekMemos } from "../../../utils/MainPageUtils/BlockUtils/MemoBlockUtils";
 
 const MemoBlock = () => {
     const thisWeekMemos = getThisWeekMemos();

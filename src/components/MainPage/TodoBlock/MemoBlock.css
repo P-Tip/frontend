@@ -5,6 +5,7 @@
 .memo-header {
     display: flex;
     align-items: center;
+    margin:-0.2rem;
 }
 
 .memo-header h3 {

@@ -1,31 +1,31 @@
 .lesson-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* LessonBlock이 독립적으로 정렬 */
-  aspect-ratio: 299.2 / 140.6; /* 고정된 비율을 사용 */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5열로 나누어 각 요일을 배치 */
+  gap: 0.18rem;
   width: 100%;
-  gap: 30px;
+  aspect-ratio: 253 / 94; /* 부모 컨테이너 고정 비율 설정 */
   margin-top: 3px;
 }
-.lesson-left, .lesson-right {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 두 개의 LessonBlock을 수평으로 배치 */
-  grid-gap: 3px;
-  width: 48%; /* 좌우 공간이 절반씩 차지하도록 설정 */
+
+.day-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  height: 100%;
 }
+
 
 .todoblock-text {
   font-size: 1.0rem;
   font-weight: bold;
-  margin: -2px 0;
-  margin-left: 5px; 
+  margin: -2px 0 5px 5px;
 }
 
-.memo-container{
+.memo-container {
   width: 100%;
   height: 100%;
   margin-top: 10px;
-  
   border-radius: 8px;
   overflow-y: auto;
   display: flex;
@@ -36,8 +36,8 @@
   background-color: #f8f8f8;
 }
 
-@media (min-width: 420px){
-  .Todoblock-text{
+@media (min-width: 420px) {
+  .todoblock-text {
     font-size: clamp(1.0rem, 3.4vw, 1.6rem);
   }
 }

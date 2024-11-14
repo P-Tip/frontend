@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchCafeteriaMenu } from '../../utils/api';
+import { fetchCafeteriaMenu } from '../../utils/api/api';
 import { getFilteredMenu, formatMenuText } from '../../utils/menuUtils';
 import './MenuBlock.css';
 
