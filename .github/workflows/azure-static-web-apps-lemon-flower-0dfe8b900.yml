@@ -1,0 +1,65 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - function1-scholarship  # 특정 브랜치에 푸시 시 빌드 및 배포
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main  # PR 대상 브랜치
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      # 코드 체크아웃
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
+
+      # Node.js 환경 설정 (Next.js는 Node.js 환경에서 빌드됩니다)
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 의존성 설치 (Next.js 앱의 패키지 설치)
+      - name: Install dependencies
+        run: npm install
+
+      # Next.js 빌드
+      - name: Build Next.js app
+        run: npm run build  # Next.js 앱을 빌드하는 명령어
+
+      # 빌드된 앱 배포
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_FLOWER_0DFE8B900 }}
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/"  # 앱의 소스 코드 경로 (Next.js 앱의 루트 디렉토리)
+          api_location: ""  # API 경로 (Next.js에서 API가 없다면 비워둠)
+          output_location: ".next"  # Next.js 빌드 후 출력 위치 (기본적으로 `out` 폴더에 정적 파일이 생성됨)
+          github_id_token: ${{ steps.idtoken.outputs.result }}
+          ###### End of Repository/Build Configurations ######
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          action: "close"
