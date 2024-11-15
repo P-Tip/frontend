@@ -8,5 +8,6 @@ module.exports = {
         },
       ];
     },
+    output: 'standalone', // Azure Static Web Apps에 최적화된 출력
   };
   
