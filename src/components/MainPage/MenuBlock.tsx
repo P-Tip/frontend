@@ -12,8 +12,7 @@ const MenuBlock: React.FC = () => {
       const menuData = await fetchCafeteriaMenu();
       console.log("Original Menu Data:", menuData);
 
-      const currentTime = new Date();
-      const { mainMenu, sideMenu } = getFilteredMenu(menuData, currentTime);
+      const { mainMenu, sideMenu } = getFilteredMenu(menuData);
 
       setMainMenuText(mainMenu ? formatMenuText([mainMenu]) : ["오늘의 학식은 없습니다"]);
       setSideMenuText(sideMenu ? formatMenuText([sideMenu]) : []);
