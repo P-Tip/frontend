@@ -5,25 +5,36 @@ import "./SearchFilter.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons'; 
 import { Search } from "lucide-react";
-import { addRecentSearch, getRecentSearches, removeRecentSearch } from "../../utils/search/recentSearch";
+import { getRecentSearches, addRecentSearch, removeRecentSearch } from "../../utils/search/recentSearch";
+import { fetchDepartmentsByConsonant } from "../../utils/search/searchHelpers";
 
 interface SearchFilterProps {
   onClose: () => void;
-  onSearch: (name: string | undefined, minPoint?: number, department?: string) => void; // name을 string | undefined로 설정
+  onSearch: (name: string | undefined, minPoint?: number, department?: string) => void;
 }
 
+const consonants = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
+
 const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
-  const [name, setName] = useState<string>(""); // 초기값을 빈 문자열로 설정
+  const [name, setName] = useState<string>("");
   const [minPoint, setMinPoint] = useState<number | undefined>(undefined);
   const [department, setDepartment] = useState<string | undefined>(undefined);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [selectedConsonant, setSelectedConsonant] = useState<string | null>(null); 
+  const [departments, setDepartments] = useState<{ departmentName: string }[]>([]); 
 
   useEffect(() => {
     setRecentSearches(getRecentSearches());
   }, []);
 
-  const handleSearch = async () => {
-    onSearch(name.trim() || undefined, minPoint, department); // name이 비어있으면 undefined 전달
+  useEffect(() => {
+    if (selectedConsonant) {
+      fetchDepartmentsByConsonant(selectedConsonant).then(setDepartments);
+    }
+  }, [selectedConsonant]);
+
+  const handleSearch = () => {
+    onSearch(name.trim() || undefined, minPoint, department);
     if (name.trim()) {
       addRecentSearch(name);
       setRecentSearches(getRecentSearches());
@@ -33,8 +44,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      handleSearch(); // Enter 키를 누르면 검색 실행
+      handleSearch();
     }
+  };
+
+  const handleDepartmentSelect = (dept: string) => {
+    setDepartment(dept);
   };
 
   const handleRemoveRecentSearch = (query: string) => {
@@ -45,13 +60,8 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
   return (
     <div className="search-overlay" onClick={onClose}>
       <div className="search-panel" onClick={(e) => e.stopPropagation()}>
+        {/* 검색 헤더 */}
         <div className="search-header">
-          <FontAwesomeIcon 
-            icon={faArrowLeft} 
-            className="back-icon" 
-            onClick={onClose} 
-            style={{ cursor: 'pointer', fontSize: '24px', color: 'black', marginRight: '8px' }}
-          />
           
           <input
             type="text"
@@ -59,11 +69,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
             className="search-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onKeyDown={handleKeyPress} // onKeyPress 대신 onKeyDown 사용
+            onKeyDown={handleKeyPress}
           />
           <Search className="search-icon" onClick={handleSearch} />
         </div>
 
+        {/* 최근 검색어 */}
         <div className="recent-searches">
           <span>최근 검색어</span>
           <div className="tags">
@@ -80,26 +91,47 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
           </div>
         </div>
 
+        {/* 검색 내용 */}
         <div className="search-content">
+          {/* 최소 포인트 입력 */}
           <div className="price-range">
-           <div className="price-min">
-             <input
-               type="number"
-               placeholder="최소 포인트"
+            <div className="price-min">
+              <input
+                type="number"
+                placeholder="최소 포인트"
                 value={minPoint ?? ""}
                 onChange={(e) => setMinPoint(e.target.value ? parseInt(e.target.value) : undefined)}
               />
             </div>
           </div>
 
+          {/* 부서 선택 */}
           <div className="departments">
+            {/* 부서 제목 */}
+            <div className="department-title">
+              <p>부서</p>
+            </div>
+            
+            {/* 초성 리스트 */}
+            <div className="consonant-list">
+              {consonants.map((consonant, index) => (
+                <button 
+                  key={index} 
+                  className={`consonant-button ${selectedConsonant === consonant ? 'selected' : ''}`}
+                  onClick={() => setSelectedConsonant(consonant)}
+                >
+                  {consonant}
+                </button>
+              ))}
+            </div>
+
+            {/* 부서 리스트 */}
             <div className="department-list">
-             <input
-                type="text"
-                placeholder="부서"
-                value={department ?? ""}
-                onChange={(e) => setDepartment(e.target.value || undefined)}
-              />
+              {departments.map((dept, index) => (
+                <div key={index} className="department-item" onClick={() => handleDepartmentSelect(dept.departmentName)}>
+                  {dept.departmentName}
+                </div>
+              ))}
             </div>
           </div>
         </div>
