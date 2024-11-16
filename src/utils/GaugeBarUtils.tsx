@@ -5,9 +5,9 @@ export const MAX_SCORE = 700000;
 
 // 게이지 바 값 계산 함수
 export const calculateGaugeValues = (currentScore: number, maxPoint: number = MAX_SCORE) => {
+  if (isNaN(currentScore)) currentScore = 0; // NaN 처리
   const percentage = (currentScore / maxPoint) * 100;
-  const mainScore = Math.floor(currentScore / 10000).toString().slice(0, 2);
-
+  const mainScore = Math.max(0, Math.floor(currentScore / 10000)).toString().slice(0, 2);
 
   return { percentage, mainScore };
 };
