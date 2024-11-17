@@ -5,7 +5,6 @@ import TodoBlock from '../components/MainPage/TodoBlock';
 import './MainPage.css';
 
 const MainPage: React.FC = () => {
-  // For reflect the modified cors code
   return (
     <div className="container">
 
