@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <div className="nav-item">
           <Icon
             type="home"
-            onClick={() => router.push('/MainPage')}
+            onClick={() => router.push('/')}
           />
           <span className="nav-label">홈</span>
         </div>

@@ -1,4 +1,3 @@
-// src/utils/api.ts
 import axios from 'axios';
 
 // Scholarship 데이터 타입
@@ -9,7 +8,9 @@ export interface Scholarship {
   subtitle: string;
   amount: string;
   logoSrc?: string;
+  minPoint: number;
   maxPoint: number;
+  departmentName?: string;
 }
 
 interface SearchParams {
@@ -18,8 +19,10 @@ interface SearchParams {
   department?: string;
   consonant?: string;
 }
-
-// 장학금 데이터를 가져오는 API 호출 함수
+export interface Department {
+  department_name: string;
+}
+// 장학금 데이터를 검색하는 API 호출 함수 (search)
 export const fetchScholarships = async (params: SearchParams = {}): Promise<Scholarship[]> => {
   try {
     let url = `/api/award`;
@@ -47,7 +50,7 @@ export const fetchScholarships = async (params: SearchParams = {}): Promise<Scho
 
     // 쿼리 파라미터가 있을 때만 URL 수정
     if (queryParts.length > 0) {
-      url = `/api/award/filter?${queryParts.join('&')}`;
+      url = `/api/award/search?${queryParts.join('&')}`;
     }
 
     const response = await axios.get(url);
@@ -58,6 +61,21 @@ export const fetchScholarships = async (params: SearchParams = {}): Promise<Scho
   }
 };
 
+// 부서를 필터링하는 API 호출 함수 (filter)
+export const fetchDepartments = async (consonant: string): Promise<{ departmentName: string }[]> => {
+  try {
+    const url = `/api/award/filter?consonant=${encodeURIComponent(consonant)}`;
+    const response = await axios.get(url);
+
+    // 'item'의 타입을 명시적으로 설정
+    return response.data.map((item: Department) => ({
+      departmentName: item.department_name || "Unnamed Department",
+    }));
+  } catch (error) {
+    console.error('Error fetching departments by consonant:', error);
+    return [];
+  }
+};
 // 학식 메뉴 데이터 타입
 export interface CafeteriaMenuItem {
   date: string;
@@ -68,8 +86,8 @@ export interface CafeteriaMenuItem {
 // 학식 메뉴 데이터를 가져오는 API 호출 함수
 export const fetchCafeteriaMenu = async (): Promise<CafeteriaMenuItem[]> => {
   try {
-    const response = await axios.get('/api/haksik/upcoming'); // 프록시 설정으로 로컬 경로 호출
-    return response.data as CafeteriaMenuItem[]; // 학식 데이터 반환
+    const response = await axios.get('/api/haksik/upcoming');
+    return response.data as CafeteriaMenuItem[];
   } catch (error) {
     console.error("Error fetching cafeteria menu:", error);
     return [];

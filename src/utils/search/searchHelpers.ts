@@ -1,5 +1,4 @@
-// src/utils/search/searchHelpers.ts
-import { fetchScholarships } from '../api/api';
+import { fetchScholarships, fetchDepartments } from '../api/api';
 import { getRecentSearches, addRecentSearch, removeRecentSearch } from "./recentSearch";
 
 // 장학금 검색 함수
@@ -16,10 +15,8 @@ export const searchScholarships = async (name?: string, minPoint?: number, depar
 // 초성에 따른 부서 목록 필터링 함수
 export const fetchDepartmentsByConsonant = async (consonant: string) => {
   try {
-    const response = await fetchScholarships({ consonant });
-    return response.map((item: any) => ({
-      departmentName: item.departmentName || "Unnamed Department",
-    }));
+    const data = await fetchDepartments(consonant); // filter API 호출
+    return data;
   } catch (error) {
     console.error("Error fetching departments by consonant:", error);
     return [];

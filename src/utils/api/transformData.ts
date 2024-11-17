@@ -8,6 +8,7 @@ export const transformScholarshipData = (data: any[]): Scholarship[] => {
     title: item.programName,
     subtitle: item.department_name,
     amount: `${item.minpoint} ~ ${item.maxpoint}`,
+    minPoint:item.minPoint,
     maxPoint: item.maxpoint,
     logoSrc: "/placeholder.svg",
   }));
