@@ -6,16 +6,16 @@ const Home: React.FC = () => {
   useEffect(() => {
     const currentHost = window.location.hostname;
 
-    // www를 붙여서 리다이렉션
-    if (currentHost === 'ptutip-e.kr') {
+    // www 리다이렉션
+    if (currentHost === 'ptutip.p-e.kr') {
       const newUrl = `https://www.${currentHost}${window.location.pathname}${window.location.search}`;
       window.location.replace(newUrl);
-      return; 
+      return; // 리다이렉션 후 추가 실행 방지
     }
 
-    // 루트 경로에서 메인 페이지로 리다이렉션
-    if (window.location.pathname === '/') {
-      window.history.replaceState(null, '', '/MainPage');
+    // 루트 경로 리다이렉션
+    if (window.location.pathname === '/' || window.location.pathname === '') {
+      window.location.replace('/MainPage'); // /MainPage로 강제 이동
     }
   }, []);
 
