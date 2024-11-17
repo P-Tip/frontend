@@ -5,7 +5,7 @@ import './MainPage.css';
 const Home: React.FC = () => {
   useEffect(() => {
     // URL 처리
-    if (window.location.hostname === 'ptutip.kro.kr') {
+    if (window.location.hostname === 'ptutip.p-e.kr') {
       const newUrl = `https://www.${window.location.hostname}${window.location.pathname}${window.location.search}`;
       window.location.replace(newUrl);
     }
