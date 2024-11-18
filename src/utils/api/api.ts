@@ -20,7 +20,9 @@ interface SearchParams {
   consonant?: string;
 }
 export interface Department {
-  department_name: string;
+  departmentName: string; 
+  location: string;      
+  internalNum: string;    
 }
 // 장학금 데이터를 검색하는 API 호출 함수 (search)
 export const fetchScholarships = async (params: SearchParams = {}): Promise<Scholarship[]> => {
@@ -61,21 +63,30 @@ export const fetchScholarships = async (params: SearchParams = {}): Promise<Scho
   }
 };
 
-// 부서를 필터링하는 API 호출 함수 (filter)
-export const fetchDepartments = async (consonant: string): Promise<{ departmentName: string }[]> => {
+export const fetchDepartments = async (
+  consonant: string
+): Promise<Department[]> => {
   try {
     const url = `/api/award/filter?consonant=${encodeURIComponent(consonant)}`;
     const response = await axios.get(url);
 
-    // 'item'의 타입을 명시적으로 설정
-    return response.data.map((item: Department) => ({
-      departmentName: item.department_name || "Unnamed Department",
+    if (!Array.isArray(response.data)) {
+      console.error("Unexpected API response format:", response.data);
+      return [];
+    }
+
+    // 응답 데이터 반환
+    return response.data.map((item: any) => ({
+      departmentName: item.departmentName || "Unnamed Department", 
+      location: item.location || "위치 정보 없음",                  
+      internalNum: item.internalNum || "내부 번호 없음",            
     }));
   } catch (error) {
-    console.error('Error fetching departments by consonant:', error);
+    console.error("Error fetching departments by consonant:", error);
     return [];
   }
 };
+
 // 학식 메뉴 데이터 타입
 export interface CafeteriaMenuItem {
   date: string;

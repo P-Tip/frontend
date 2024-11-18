@@ -3,11 +3,12 @@ import React, { Fragment } from 'react';
 
 export const MAX_SCORE = 700000;
 
-// 게이지 바 값 계산 함수
 export const calculateGaugeValues = (currentScore: number, maxPoint: number = MAX_SCORE) => {
-  if (isNaN(currentScore)) currentScore = 0; // NaN 처리
-  const percentage = (currentScore / maxPoint) * 100;
-  const mainScore = Math.max(0, Math.floor(currentScore / 10000)).toString().slice(0, 2);
+  if (isNaN(currentScore) || currentScore < 0) currentScore = 0; // NaN 및 음수 처리
+
+  const percentage = Math.min(100, Math.max(0, (currentScore / maxPoint) * 100)); // 0~100% 제한
+  const rawScore = Math.floor(currentScore / 10000); // 기본 점수 계산
+  const mainScore = Math.min(rawScore, 70).toString(); 
 
   return { percentage, mainScore };
 };

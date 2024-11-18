@@ -22,6 +22,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedConsonant, setSelectedConsonant] = useState<string | null>(null); 
   const [departments, setDepartments] = useState<{ departmentName: string }[]>([]); 
+  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+
+  const handleDepartmentSelect = (dept: string) => {
+    setSelectedDepartment(dept); 
+    setDepartment(dept);        
+  };
 
   useEffect(() => {
     setRecentSearches(getRecentSearches());
@@ -48,9 +54,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
     }
   };
 
-  const handleDepartmentSelect = (dept: string) => {
-    setDepartment(dept);
-  };
 
   const handleRemoveRecentSearch = (query: string) => {
     removeRecentSearch(query);
@@ -128,7 +131,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
             {/* 부서 리스트 */}
             <div className="department-list">
               {departments.map((dept, index) => (
-                <div key={index} className="department-item" onClick={() => handleDepartmentSelect(dept.departmentName)}>
+                <div 
+                  key={index} 
+                  className={`department-item ${selectedDepartment === dept.departmentName ? 'selected' : ''}`} 
+                  onClick={() => handleDepartmentSelect(dept.departmentName)}
+                >
                   {dept.departmentName}
                 </div>
               ))}
