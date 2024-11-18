@@ -23,13 +23,18 @@ export const saveScoreToLocalStorage = (score: number) => {
   localStorage.setItem('currentScore', score.toString());
 };
 
-// 로컬 스토리지에서 스코어 불러오기 함수
 export const loadScoreFromLocalStorage = (): number => {
-  if (typeof window !== "undefined") { 
-    const savedScore = localStorage.getItem('currentScore');
-    return savedScore ? parseInt(savedScore, 10) : 0;
+  if (typeof window !== "undefined") {
+    try {
+      const savedScore = localStorage.getItem("currentScore");
+      const parsedScore = parseInt(savedScore || "0", 10);
+      return isNaN(parsedScore) ? 0 : parsedScore; // NaN일 경우 0 반환
+    } catch (error) {
+      console.error("Error loading score from localStorage:", error);
+      return 0; // 오류 시 기본값 반환
+    }
   }
-  return 0;
+  return 0; // 서버 환경에서는 기본값 반환
 };
 
 // 게이지 바 렌더링 함수
@@ -39,6 +44,8 @@ export const renderGaugeBar = (
   showTotalScore: boolean = false
 ) => {
   const { percentage, mainScore } = calculateGaugeValues(currentScore, MAX_SCORE);
+
+  console.log("Gauge values:", { currentScore, percentage, mainScore }); // 디버깅 로그 추가
 
   return (
     <Fragment>

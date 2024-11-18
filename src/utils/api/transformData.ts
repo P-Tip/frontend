@@ -7,9 +7,9 @@ export const transformScholarshipData = (data: any[]): Scholarship[] => {
     date: "", 
     title: item.programName,
     subtitle: item.department_name,
-    amount: `${item.minpoint} ~ ${item.maxpoint}`,
-    minPoint:item.minPoint,
-    maxPoint: item.maxpoint,
+    amount: `${item.min_point} ~ ${item.max_point}`,
+    minPoint:item.min_Point,
+    maxPoint: item.max_point,
     logoSrc: "/placeholder.svg",
   }));
 };

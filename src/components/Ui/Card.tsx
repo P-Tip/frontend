@@ -47,16 +47,20 @@ export function ScholarshipCard({
   }, [id]);
 
   const handleButtonClick = () => {
+    console.log(`Button clicked for ID: ${id}, isAdded: ${isAdded}`); // 클릭 확인 로그 추가
+  
     const updatedAddedItems = JSON.parse(localStorage.getItem("addedItems") || "{}");
-
+  
     if (isAdded) {
+      console.log(`Removing scholarship ${id}: -${maxPoint}`); // 제거 로그
       onAdd(-maxPoint);
       delete updatedAddedItems[id];
     } else {
+      console.log(`Adding scholarship ${id}: +${maxPoint}`); // 추가 로그
       onAdd(maxPoint);
       updatedAddedItems[id] = true;
     }
-
+  
     localStorage.setItem("addedItems", JSON.stringify(updatedAddedItems));
     setIsAdded(!isAdded);
   };

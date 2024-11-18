@@ -23,8 +23,21 @@ export default function ScholarshipList({ scholarships, onAdd }: ScholarshipList
   const handleAddToggle = (id: string, maxPoint: number) => {
     setAddedItems((prev) => {
       const newAddedItems = { ...prev, [id]: !prev[id] };
-      localStorage.setItem("addedItems", JSON.stringify(newAddedItems)); 
-      onAdd(prev[id] ? -maxPoint : maxPoint); 
+  
+      // 추가/제거 로그 출력
+      if (prev[id]) {
+        console.log(`장학금 ${id} 제거됨: -${maxPoint}`);
+      } else {
+        console.log(`장학금 ${id} 추가됨: +${maxPoint}`);
+      }
+  
+      localStorage.setItem("addedItems", JSON.stringify(newAddedItems));
+  
+      // onAdd 함수 호출 로그
+      const change = prev[id] ? -maxPoint : maxPoint;
+      console.log(`onAdd 호출: ${change}`);
+      onAdd(change);
+  
       return newAddedItems;
     });
   };
