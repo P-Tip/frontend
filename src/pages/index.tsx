@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const currentHost = window.location.hostname;
 
-    // www 리다이렉션만 처리 (루트 경로 리다이렉션 제거)
+    // www 리다이렉션 처리 
     if (currentHost === 'ptutip.p-e.kr') {
       const newUrl = `https://www.${currentHost}${window.location.pathname}${window.location.search}`;
       window.location.replace(newUrl);
@@ -15,7 +15,6 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      {/* 루트 경로에서 MainPage를 직접 렌더링 */}
       <MainPage />
     </div>
   );

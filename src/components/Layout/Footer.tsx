@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
         <div className="nav-item">
           <Icon
             type="reminder"
-            onClick={() => console.log('Reminder clicked')}
+            onClick={() => router.push('/To-Do')}
           />
           <span className="nav-label">To Do</span>
         </div>
