@@ -17,6 +17,7 @@
     width: 100%;
     margin-top: -0.5rem;
     background-color: #ffffff; /* 카드 배경색을 흰색으로 설정 */
+    display: flex;
   }
   
   
@@ -41,10 +42,6 @@
     justify-content: center;
     border-radius: 50%;
     overflow: hidden;
-  }
-  
-  .logo-image {
-    border-radius: 50%;
   }
   
   .scholarship-date {

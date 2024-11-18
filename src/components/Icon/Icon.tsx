@@ -3,12 +3,13 @@ import { getIconImage } from '../../utils/IconUtils';
 
 interface IconProps {
   type: string;
+  isSelected?: boolean;
   onClick?: () => void;
 }
 
-const Icon: React.FC<IconProps> = ({ type, onClick }) => (
+const Icon: React.FC<IconProps> = ({ type, isSelected = false, onClick }) => (
   <button className="transparent-button" onClick={onClick}>
-    {getIconImage(type)}
+    {getIconImage(type, isSelected)}
   </button>
 );
 

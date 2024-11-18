@@ -61,7 +61,6 @@ export default function ScholarshipList({ scholarships, onAdd }: ScholarshipList
             title={scholarship.title}
             subtitle={scholarship.subtitle}
             amount={scholarship.amount}
-            logoSrc={scholarship.logoSrc}
             isAdded={!!addedItems[scholarship.id]}
             onAddToggle={() => handleAddToggle(scholarship.id, scholarship.maxPoint)}
             onAdd={onAdd} 

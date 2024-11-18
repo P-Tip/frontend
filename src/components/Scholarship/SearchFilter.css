@@ -88,6 +88,7 @@
   border-radius: 10px;
   align-items: center;
   height: 80%;
+  
 }
 
 .department-title {
@@ -112,6 +113,7 @@
   width: 100%;                 /* 부모 요소의 전체 너비 */
   height: 100%; /* 고정 높이 설정 */
   overflow-y: auto; /* 세로 스크롤 활성화 */
+  margin-bottom: 1rem;
 }
 
 .department-item {

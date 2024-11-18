@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./ScholarshipSearch.css";
 import "./SearchFilter.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +28,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
   const handleDepartmentSelect = (dept: string) => {
     setSelectedDepartment(dept); 
     setDepartment(dept);        
+  };
+
+  // 초성 버튼 클릭 처리
+  const handleConsonantClick = (consonant: string) => {
+    setSelectedConsonant((prev) => (prev === consonant ? null : consonant));
   };
 
   // 초성 또는 전체 부서 데이터 로드
@@ -144,7 +149,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
                 <button 
                   key={index} 
                   className={`consonant-button ${selectedConsonant === consonant ? 'selected' : ''}`}
-                  onClick={() => setSelectedConsonant(consonant)}
+                  onClick={() => handleConsonantClick(consonant)} // 수정된 로직 적용
                 >
                   {consonant}
                 </button>

@@ -1,17 +1,6 @@
-// src/components/Ui/Card.tsx
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import { getLogoImage } from "../../utils/ImageUtils"; // 유틸 import
 import "./Card.css";
-
-// Card 컴포넌트를 import하여 사용할 수 있도록 추가합니다.
-interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function Card({ children, className = "" }: CardProps) {
-  return <div className={`card-container ${className}`}>{children}</div>;
-}
 
 // ScholarshipCard 컴포넌트의 props 정의
 interface ScholarshipCardProps {
@@ -20,7 +9,6 @@ interface ScholarshipCardProps {
   title: string;
   subtitle: string;
   amount: string;
-  logoSrc?: string;
   isAdded: boolean;
   onAddToggle: () => void;
   onAdd: (change: number) => void;
@@ -33,7 +21,6 @@ export function ScholarshipCard({
   title,
   subtitle,
   amount,
-  logoSrc = "/placeholder.svg",
   onAdd,
   maxPoint
 }: ScholarshipCardProps) {
@@ -62,13 +49,15 @@ export function ScholarshipCard({
     localStorage.setItem("addedItems", JSON.stringify(updatedAddedItems));
     setIsAdded(!isAdded);
   };
+
   console.log(`Rendering ScholarshipCard for department: ${subtitle}`);
 
   return (
-    <Card className="scholarship-card">
+    <div className="scholarship-card">
       <div className="scholarship-header">
         <div className="scholarship-logo">
-          <Image src={logoSrc} alt={`${title} 로고`} width={40} height={40} className="logo-image" />
+          {/* 평택대학교 로고 렌더링 */}
+          {getLogoImage('university', '평택대학교 로고')}
         </div>
         <div>
           <div className="scholarship-date">{date}</div>
@@ -83,6 +72,6 @@ export function ScholarshipCard({
       >
         {isAdded ? "✓ 담김" : "담기"}
       </button>
-    </Card>
+    </div>
   );
 }

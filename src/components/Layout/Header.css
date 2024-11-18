@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px; 
+  padding: 0 5px;
 }
 
 /* 왼쪽 아이콘 정렬 */
@@ -14,11 +14,10 @@
 }
 
 /* 로고가 들어갈 영역 스타일 */
-.logo-placeholder {
+.logo-image {
   width: 40px;  
   height: 40px;  
-  background-color: #e0e0e0;  /* 임시 배경색 */
-  border-radius: 10px;  
+  
 }
 
 /* 오른쪽 아이콘 정렬 */
