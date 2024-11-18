@@ -6,7 +6,8 @@
 .tag,
 .price-min,
 .price-max,
-.department-item
+.department-item,
+.lesson-list
 {
   width: 100%;
   background-color: #ffffff;
@@ -73,14 +74,21 @@
   max-width: 100px; 
   flex-direction: row;
 }
-.price-min,
-.price-max
-{
-  width:80%;
-  height:80%;
+.price-min {
+  width: 80%;
+  height: 55%;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column; /* 위에서 아래로 배치 */
+  align-items: center;    /* 가로 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
 }
 .department-item {
   aspect-ratio:250/26;
   border-radius: 10px;
+}
+.lesson-list{
+  margin-top: 1rem;
+  border-radius:10px;
+  aspect-ratio: 280/450;
 }

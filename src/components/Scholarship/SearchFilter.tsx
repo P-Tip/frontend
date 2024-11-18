@@ -1,12 +1,11 @@
-// src/components/Scholarship/SearchFilter.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./ScholarshipSearch.css";
 import "./SearchFilter.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons'; 
 import { Search } from "lucide-react";
 import { getRecentSearches, addRecentSearch, removeRecentSearch } from "../../utils/search/recentSearch";
-import { fetchDepartmentsByConsonant } from "../../utils/search/searchHelpers";
+import { fetchDepartmentsByConsonant, fetchAllDepartments } from "../../utils/search/searchHelpers";
 
 interface SearchFilterProps {
   onClose: () => void;
@@ -23,22 +22,24 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
   const [selectedConsonant, setSelectedConsonant] = useState<string | null>(null); 
   const [departments, setDepartments] = useState<{ departmentName: string }[]>([]); 
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false); // 편집 상태 관리
 
+  // 부서 선택 처리
   const handleDepartmentSelect = (dept: string) => {
     setSelectedDepartment(dept); 
     setDepartment(dept);        
   };
 
+  // 초성 또는 전체 부서 데이터 로드
   useEffect(() => {
-    setRecentSearches(getRecentSearches());
-  }, []);
-
-  useEffect(() => {
-    if (selectedConsonant) {
+    if (!selectedConsonant) {
+      fetchAllDepartments().then(setDepartments);
+    } else {
       fetchDepartmentsByConsonant(selectedConsonant).then(setDepartments);
     }
   }, [selectedConsonant]);
 
+  // 검색 실행 처리
   const handleSearch = () => {
     onSearch(name.trim() || undefined, minPoint, department);
     if (name.trim()) {
@@ -48,13 +49,14 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
     }
   };
 
+  // Enter 키 입력 처리
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
   };
 
-
+  // 최근 검색어 삭제 처리
   const handleRemoveRecentSearch = (query: string) => {
     removeRecentSearch(query);
     setRecentSearches(getRecentSearches());
@@ -65,7 +67,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
       <div className="search-panel" onClick={(e) => e.stopPropagation()}>
         {/* 검색 헤더 */}
         <div className="search-header">
-          
+          <FontAwesomeIcon 
+            icon={faArrowLeft} 
+            className="back-arrow-icon" 
+            onClick={onClose} 
+          />
           <input
             type="text"
             placeholder="검색어"
@@ -98,24 +104,41 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
         <div className="search-content">
           {/* 최소 포인트 입력 */}
           <div className="price-range">
+            <div className="price-title">
+              <p>최소 금액 범위</p>
+            </div>
             <div className="price-min">
-              <input
-                type="number"
-                placeholder="최소 포인트"
-                value={minPoint ?? ""}
-                onChange={(e) => setMinPoint(e.target.value ? parseInt(e.target.value) : undefined)}
-              />
+              <p>최소</p>
+              {isEditing ? (
+                <input
+                  type="number"
+                  value={minPoint ?? ""}
+                  autoFocus
+                  onBlur={() => setIsEditing(false)} // 입력 필드에서 포커스 해제 시 텍스트로 전환
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setIsEditing(false); // 엔터키를 누르면 편집 상태 종료
+                    }
+                  }}
+                  onChange={(e) => setMinPoint(e.target.value ? parseInt(e.target.value) : undefined)}
+                  style={{ width: `${(minPoint?.toString().length || 1) * 1.2+1.5}ch` }}
+                />
+              ) : (
+                <span
+                  onClick={() => setIsEditing(true)} // "0점" 클릭 시 입력 필드로 전환
+                  style={{ cursor: "pointer" }}
+                >
+                  {minPoint ?? 0}점
+                </span>
+              )}
             </div>
           </div>
 
           {/* 부서 선택 */}
           <div className="departments">
-            {/* 부서 제목 */}
             <div className="department-title">
               <p>부서</p>
             </div>
-            
-            {/* 초성 리스트 */}
             <div className="consonant-list">
               {consonants.map((consonant, index) => (
                 <button 
@@ -127,8 +150,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
                 </button>
               ))}
             </div>
-
-            {/* 부서 리스트 */}
             <div className="department-list">
               {departments.map((dept, index) => (
                 <div 

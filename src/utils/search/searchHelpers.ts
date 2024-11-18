@@ -12,13 +12,29 @@ export const searchScholarships = async (name?: string, minPoint?: number, depar
   }
 };
 
-// 초성에 따른 부서 목록 필터링 함수
-export const fetchDepartmentsByConsonant = async (consonant: string) => {
+// 모든 부서 목록 로드 함수
+export const fetchAllDepartments = async () => {
   try {
-    const data = await fetchDepartments(consonant); // filter API 호출
+    const data = await fetchDepartments(""); // 초성 없이 호출하여 모든 부서를 가져옴
     return data;
   } catch (error) {
-    console.error("Error fetching departments by consonant:", error);
+    console.error("Error fetching all departments:", error);
+    return [];
+  }
+};
+
+// 초성에 따른 부서 목록 필터링 및 기본 부서 로드
+export const fetchDepartmentsByConsonant = async (consonant: string | null) => {
+  try {
+    if (!consonant) {
+      // 초성이 null인 경우 모든 부서 로드
+      return await fetchAllDepartments();
+    }
+    // 초성이 있는 경우 해당 초성으로 필터링
+    const data = await fetchDepartments(consonant); 
+    return data;
+  } catch (error) {
+    console.error("Error fetching departments:", error);
     return [];
   }
 };
