@@ -1,3 +1,5 @@
+// src/utils/search/searchHelpers.ts
+
 import { fetchScholarships, fetchDepartments } from '../api/api';
 import { getRecentSearches, addRecentSearch, removeRecentSearch } from "./recentSearch";
 
@@ -45,20 +47,22 @@ export const executeSearch = (
   minPoint: number | undefined,
   department: string | undefined,
   onSearch: (name: string, minPoint?: number, department?: string) => void,
-  setRecentSearches: React.Dispatch<React.SetStateAction<string[]>>
+  setRecentSearches: React.Dispatch<React.SetStateAction<string[]>>,
+  storageKey: string // 새로운 storageKey 인자 추가
 ) => {
   if (name.trim()) {
     onSearch(name, minPoint, department);
-    addRecentSearch(name);
-    setRecentSearches(getRecentSearches());
+    addRecentSearch(name, storageKey); // 특정 키로 저장
+    setRecentSearches(getRecentSearches(storageKey)); // 특정 키로 최근 검색어 로드
   }
 };
 
 // 최근 검색어 삭제 함수 - 최근 검색어에서 특정 검색어를 삭제하고 목록을 업데이트
 export const handleRemoveSearch = (
   query: string,
-  setRecentSearches: React.Dispatch<React.SetStateAction<string[]>>
+  setRecentSearches: React.Dispatch<React.SetStateAction<string[]>>,
+  storageKey: string // 새로운 storageKey 인자 추가
 ) => {
-  removeRecentSearch(query);
-  setRecentSearches(getRecentSearches());
+  removeRecentSearch(query, storageKey); // 특정 키로 삭제
+  setRecentSearches(getRecentSearches(storageKey)); // 특정 키로 최근 검색어 로드
 };

@@ -1,10 +1,11 @@
-.main-menu {
+.menu-page {
   width: 100%;
-  height:100%;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* 텍스트를 중앙에 정렬 */
-  text-align: center; /* 텍스트가 블럭 안에서 중앙에 정렬되도록 */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .menu-item {
   font-size: 0.85rem;
@@ -26,6 +27,18 @@
   font-weight: bold; 
   margin-bottom: 6px;
   color: #333333; /* 날짜와 식사 종류를 강조 */
+}
+.slider-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  width: 200%; /* 페이지 두 개라서 200% */
 }
 
 @media (min-width: 420px) {

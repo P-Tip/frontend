@@ -15,14 +15,20 @@ interface SearchFilterProps {
 const consonants = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
 
 const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(""); // 검색어 상태
   const [minPoint, setMinPoint] = useState<number | undefined>(undefined);
   const [department, setDepartment] = useState<string | undefined>(undefined);
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]); // 최근 검색어 목록
   const [selectedConsonant, setSelectedConsonant] = useState<string | null>(null); 
   const [departments, setDepartments] = useState<{ departmentName: string }[]>([]); 
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false); // 편집 상태 관리
+  const storageKey = 'recentSearchesScholarship'; // 장학금 검색 고유 키
+
+   // 최근 검색어 로드
+   useEffect(() => {
+    setRecentSearches(getRecentSearches(storageKey)); // 고유 키로 데이터 로드
+  }, [storageKey]);
 
   // 부서 선택 처리
   const handleDepartmentSelect = (dept: string) => {
@@ -48,9 +54,9 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
   const handleSearch = () => {
     onSearch(name.trim() || undefined, minPoint, department);
     if (name.trim()) {
-      addRecentSearch(name);
-      setRecentSearches(getRecentSearches());
-      setName("");
+      addRecentSearch(name.trim(), storageKey); // 고유 키로 저장
+      setRecentSearches(getRecentSearches(storageKey)); // 목록 갱신
+      setName(""); // 검색어 초기화
     }
   };
 
@@ -63,8 +69,8 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onClose, onSearch }) => {
 
   // 최근 검색어 삭제 처리
   const handleRemoveRecentSearch = (query: string) => {
-    removeRecentSearch(query);
-    setRecentSearches(getRecentSearches());
+    removeRecentSearch(query, storageKey); // 고유 키로 삭제
+    setRecentSearches(getRecentSearches(storageKey)); // 목록 갱신
   };
 
   return (

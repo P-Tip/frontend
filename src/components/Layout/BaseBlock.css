@@ -60,19 +60,19 @@
 }
 
 .tag {
-  display: flex;
+  display: inline-flex; /* inline-flex로 설정하여 콘텐츠 크기에 따라 폭을 자동 조정 */
   align-items: center; /* 아이콘과 텍스트를 수직 가운데 정렬 */
-  justify-content: space-between; /* 텍스트와 X 아이콘 사이 간격 유지 */
-  padding: 0.2rem 0.4rem; /* 태그 내부 여백 줄이기 */
-  
+  justify-content: space-between; /* 텍스트와 아이콘 간의 간격 유지 */
+  padding: 0.2rem 0.4rem; /* 태그 내부 여백 */
+  width:6rem;
   border-radius: 6px;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
   color: #333;
   
-  width: auto; 
-  height: auto;
-  max-width: 100px; 
-  flex-direction: row;
+  height: auto; /* 높이를 콘텐츠 크기에 맞게 조정 */
+  max-width: none; /* 최대 너비 제한을 제거 */
+  flex-direction: row; /* 요소를 가로로 배치 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 (선택사항) */
 }
 .price-min {
   width: 80%;

@@ -1,0 +1,48 @@
+.course-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
+    border-bottom: 2px solid green;
+  }
+  
+  .course-info {
+    flex: 1;
+  }
+  
+  .course-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem;
+  }
+  
+  .course-professor,
+  .course-time,
+  .course-details,
+  .course-number {
+    margin: 0.2rem 0;
+    font-size: 0.6rem;
+    color: #555;
+    font-weight: bold;
+  }
+
+  .course-details {
+    margin-bottom: 0.7rem;
+  }
+  
+  .add-button-time {
+    font-size: 0.7rem;
+    background-color: #117554;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .add-button:hover {
+    background-color: #006400;
+  }
+  
