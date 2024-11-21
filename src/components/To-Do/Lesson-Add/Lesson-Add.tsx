@@ -1,98 +1,145 @@
 import React, { useState, useEffect } from "react";
 import "./Lesson-Add.css";
 import CourseBlock from "../../Ui/CourseBlock";
-import { fetchFilteredCourses, CourseData } from "../../../utils/api/api";
-import { managePopupState, updateFilters, mapFiltersToParams } from "../../../utils/search/filterUtils";
 import CourseSearchPopup from "./CourseSearchPopup";
+import MajorAreaPopup from "./MajorAreaPopup"; // MajorAreaPopup 다시 추가
+import { fetchFilteredCourses, CourseData } from "../../../utils/api/api";
+import { mapFiltersToParams } from "../../../utils/filterUtils";
+import { Filters } from "../../../type";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface LessonAddProps {
   onClose: () => void;
   onAddToSchedule: (course: CourseData) => void;
 }
 
-type Filters = {
-  title: string;       // 과목명
-  professor: string;   // 교수명
-  courseNo: string;    // 과목코드
-  classroom: string;   // 장소
-  department: string;
-  grade: string;
-  time: string;
-  type: string;
-  credit: string;
-};
-
-
 const LessonAdd: React.FC<LessonAddProps> = ({ onClose, onAddToSchedule }) => {
   const [courses, setCourses] = useState<CourseData[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<CourseData[]>([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<keyof Filters | null>(null);
+  const [popupType, setPopupType] = useState<"search" | "major" | null>(null); // 팝업 타입 관리
+  const [activeFilter, setActiveFilter] = useState<keyof Filters>("title");
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const [filters, setFilters] = useState<Filters>({
     title: "전체",
     professor: "전체",
     courseNo: "전체",
     classroom: "전체",
-    department: "전체",
+    major: "전체",
     grade: "전체",
     time: "전체",
     type: "전체",
     credit: "전체",
   });
 
-  // API 호출
   useEffect(() => {
-    const params = mapFiltersToParams(filters);
+    const params = mapFiltersToParams(filters, searchValue, activeFilter);
+    console.log("Filters applied to API call:", filters);
+    console.log("Mapped API parameters:", params);
+
     fetchFilteredCourses(params)
       .then((data) => {
         setCourses(data);
         setFilteredCourses(data);
+        console.log("Fetched courses:", data);
       })
       .catch((error) => console.error("Error fetching courses:", error));
-  }, [filters]);
+  }, [filters, searchValue, activeFilter]);
 
-  // 검색어를 기반으로 필터 업데이트
+  const handleSearchValueUpdate = (value: string) => {
+    setSearchValue(value);
+    setIsPopupVisible(false); // 팝업 닫기
+  };
+
   const handleFilterUpdate = (filterName: keyof Filters, value: string) => {
     const updatedFilters = { ...filters };
-
-    // 선택된 필터만 업데이트하고 나머지는 초기화
-    Object.keys(filters).forEach((key) => {
-      updatedFilters[key as keyof Filters] = key === filterName ? value : "전체";
-    });
-
+    updatedFilters[filterName] = value;
     setFilters(updatedFilters);
+    setIsPopupVisible(false); // 팝업 닫기
+  };
+
+  const handleFilterClear = (filterName: keyof Filters) => {
+    const updatedFilters = { ...filters };
+    updatedFilters[filterName] = "전체"; // 선택된 필터 초기화
+    setFilters(updatedFilters);
+
+    if (filterName === activeFilter) {
+      setSearchValue(""); // 검색값 초기화
+    }
+  };
+
+  const handleOpenPopup = (type: "search" | "major") => {
+    setPopupType(type);
+    setIsPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+    setPopupType(null);
+  };
+
+  const handleSearchConditionChange = (condition: keyof Filters) => {
+    setActiveFilter(condition);
   };
 
   return (
     <div className="lesson-add-overlay">
       <div className="lesson-add-container">
-        <div className="arrow-container" onClick={() => setIsPopupVisible(false)}>
+        <div className="arrow-container" onClick={onClose}>
           <div className="close-arrow">▼</div>
         </div>
 
         {/* 검색어 버튼 */}
         <div className="filter-container">
-          <div
-            className="filter-item"
-            onClick={() => managePopupState("title", setActiveFilter, setIsPopupVisible)}
-          >
+          <div className="filter-item" onClick={() => handleOpenPopup("search")}>
             <span className="filter-label">검색어:</span>
             <span className="filter-value">
-              {filters.title !== "전체" ? filters.title : "없음"}
+              {searchValue !== "" ? searchValue : "없음"}
             </span>
+            {searchValue !== "" && (
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="clear-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSearchValue(""); // 검색값 초기화
+                }}
+              />
+            )}
+          </div>
+          <div className="filter-item" onClick={() => handleOpenPopup("major")}>
+            <span className="filter-label">전공/영역:</span>
+            <span className="filter-value">
+              {filters.major !== "전체" ? filters.major : "없음"}
+            </span>
+            {filters.major !== "전체" && (
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="clear-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterClear("major");
+                }}
+              />
+            )}
           </div>
         </div>
 
         {/* 팝업 */}
-        {isPopupVisible && activeFilter && (
+        {isPopupVisible && popupType === "search" && (
           <CourseSearchPopup
-            onClose={() => managePopupState(null, setActiveFilter, setIsPopupVisible)}
-            onSearch={(params) => {
-              const [key, value] = Object.entries(params)[0];
-              handleFilterUpdate(key as keyof Filters, value);
-            }}
-            storageKey="courseSearch"
+            onClose={handleClosePopup}
+            onSearch={handleSearchValueUpdate}
+            activeFilter={activeFilter}
+            onConditionChange={handleSearchConditionChange}
+          />
+        )}
+        {isPopupVisible && popupType === "major" && (
+          <MajorAreaPopup
+            onClose={handleClosePopup}
+            onSelect={(value) => handleFilterUpdate("major", value)} // 전공 필터 업데이트
           />
         )}
 
@@ -110,7 +157,7 @@ const LessonAdd: React.FC<LessonAddProps> = ({ onClose, onAddToSchedule }) => {
                 course_time={course.course_time}
                 classroom={course.classroom}
                 professor={course.professor}
-                onAdd={() => onAddToSchedule(course)} // onAdd를 추가
+                onAdd={() => onAddToSchedule(course)}
               />
             ))
           ) : (

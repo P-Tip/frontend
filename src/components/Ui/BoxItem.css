@@ -1,0 +1,31 @@
+.box-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-radius: 8px;
+    background: #f8f8f8;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-bottom: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0.1, 0.1, 0.15);
+  }
+  
+  .box-item:hover {
+    background: #e9ecef;
+  }
+  
+  .box-item.selected {
+    background: #d1e7dd; /* 선택된 항목의 배경색 */
+  }
+  
+  .box-item span {
+    font-size: 16px;
+    color: #495057;
+  }
+  
+  .chevron-icon {
+    font-size: 18px;
+    color: #6c757d;
+  }
+  

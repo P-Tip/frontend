@@ -3,27 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Search } from "lucide-react";
 import "./CourseSearchPopup.css";
+import { Filters } from "../../../type"; // Filters 타입 가져오기
 
 interface CourseSearchPopupProps {
   onClose: () => void;
-  onSearch: (params: { [key: string]: string }) => void;
-  storageKey: string;
+  onSearch: (value: string) => void;
+  activeFilter: keyof Filters; // 동일한 Filters 타입 참조
+  onConditionChange: (condition: keyof Filters) => void;
 }
-type Filters = {
-  title: string;       // 과목명
-  professor: string;   // 교수명
-  courseNo: string;    // 과목코드
-  classroom: string;   // 장소
-  department: string;
-  grade: string;
-  time: string;
-  type: string;
-  credit: string;
-};
 
-const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch }) => {
+const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({
+  onClose,
+  onSearch,
+  activeFilter,
+  onConditionChange,
+}) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedSearchType, setSelectedSearchType] = useState<keyof Filters>("title");
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
@@ -31,11 +26,8 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
       return;
     }
 
-    const queryParams = {
-      [selectedSearchType]: searchTerm.trim(),
-    };
-
-    onSearch(queryParams);
+    console.log(`Executing search with filter: ${activeFilter}, term: ${searchTerm}`);
+    onSearch(searchTerm.trim());
     onClose();
   };
 
@@ -43,13 +35,17 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
     <div className="search-overlay" onClick={onClose}>
       <div className="popup-container" onClick={(e) => e.stopPropagation()}>
         <div className="popup-header">
-          <FontAwesomeIcon icon={faTimes} onClick={onClose} className="close-icon" />
+          <FontAwesomeIcon
+            icon={faTimes}
+            onClick={onClose}
+            className="close-icon"
+          />
           <input
             type="text"
             className="search-input"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="검색어를 입력하세요"
+            placeholder={`Enter ${activeFilter}...`}
           />
           <Search className="search-icon" onClick={handleSearch} />
         </div>
@@ -60,8 +56,8 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
             <input
               type="radio"
               value="title"
-              checked={selectedSearchType === "title"}
-              onChange={() => setSelectedSearchType("title")}
+              checked={activeFilter === "title"}
+              onChange={() => onConditionChange("title")}
             />
             과목명
           </label>
@@ -69,8 +65,8 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
             <input
               type="radio"
               value="professor"
-              checked={selectedSearchType === "professor"}
-              onChange={() => setSelectedSearchType("professor")}
+              checked={activeFilter === "professor"}
+              onChange={() => onConditionChange("professor")}
             />
             교수명
           </label>
@@ -78,8 +74,8 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
             <input
               type="radio"
               value="courseNo"
-              checked={selectedSearchType === "courseNo"}
-              onChange={() => setSelectedSearchType("courseNo")}
+              checked={activeFilter === "courseNo"}
+              onChange={() => onConditionChange("courseNo")}
             />
             과목코드
           </label>
@@ -87,8 +83,8 @@ const CourseSearchPopup: React.FC<CourseSearchPopupProps> = ({ onClose, onSearch
             <input
               type="radio"
               value="classroom"
-              checked={selectedSearchType === "classroom"}
-              onChange={() => setSelectedSearchType("classroom")}
+              checked={activeFilter === "classroom"}
+              onChange={() => onConditionChange("classroom")}
             />
             장소
           </label>
