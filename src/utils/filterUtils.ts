@@ -5,8 +5,8 @@ export type Filters = {
   classroom: string;   // 장소
   major: string;
   grade: string;
-  time: string;
-  type: string;
+  times: string;
+  courseTypeFilter: string; // 구분 필터 추가
   credit: string;
 };
 
@@ -18,8 +18,8 @@ export const initializeFilters = (): Filters => ({
   classroom: "전체",
   major: "전체",
   grade: "전체",
-  time: "전체",
-  type: "전체",
+  times: "전체",
+  courseTypeFilter: "전체", // 초기화 값 추가
   credit: "전체",
 });
 
@@ -40,7 +40,6 @@ export const resetFilter = (filters: Filters, filterName: keyof Filters): Filter
   [filterName]: "전체",
 });
 
-// Filters를 API 쿼리 파라미터로 변환
 export const mapFiltersToParams = (
   filters: Filters,
   searchValue: string,
@@ -49,14 +48,19 @@ export const mapFiltersToParams = (
   const params: { [key: string]: string } = {};
 
   Object.entries(filters).forEach(([key, value]) => {
-    if (value !== "전체") {
-      params[key] = value;
+    if (value !== "전체" && value !== "") {
+      if (key === "courseTypeFilter") {
+        params["courseTypes"] = value; // courseTypeFilter를 courseTypes로 매핑
+      } else {
+        params[key] = value;
+      }
     }
   });
 
   if (searchValue !== "" && activeFilter) {
-    params[activeFilter] = searchValue; // 현재 검색 조건에 검색값 추가
+    params[activeFilter] = searchValue;
   }
 
   return params;
 };
+

@@ -1,0 +1,53 @@
+.grade-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .grade-popup-container {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .grade-popup-header {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .back-icon {
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 12px;
+    color: #6c757d;
+  }
+  
+  .popup-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0;
+  }
+  
+  .grade-popup-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  

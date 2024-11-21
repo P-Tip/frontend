@@ -55,7 +55,7 @@ export interface CourseSearchParams {
   classroom?: string;        // 강의실
   major?: string;            // 전공
   grade?: number;            // 최소 학년
-  credits?: string;          // 학점 (쉼표로 구분된 문자열)
+  credit?: number;          // 학점 
   courseTypes?: string;      // 강의 유형 (쉼표로 구분된 문자열)
   times?: string;            // 시간 (쉼표로 구분된 문자열)
 }
@@ -133,34 +133,33 @@ export const fetchCourseData = async (
     // 기본 URL 설정
     let url = "/api/course/search";
     const queryParts: string[] = [];
-
     // 파라미터에 따라 쿼리 추가
     if (params.title) {
-      queryParts.push(`title=${encodeURIComponent(params.title)}`);
+      queryParts.push(`title=${params.title}`);
     }
     if (params.professor) {
-      queryParts.push(`professor=${encodeURIComponent(params.professor)}`);
+      queryParts.push(`professor=${params.professor}`);
     }
     if (params.courseNo) {
-      queryParts.push(`courseNo=${encodeURIComponent(params.courseNo)}`);
+      queryParts.push(`courseNo=${params.courseNo}`);
     }
     if (params.classroom) {
-      queryParts.push(`classroom=${encodeURIComponent(params.classroom)}`);
+      queryParts.push(`classroom=${params.classroom}`);
     }
     if (params.major) {
-      queryParts.push(`major=${encodeURIComponent(params.major)}`);
+      queryParts.push(`major=${params.major}`);
     }
     if (params.grade) {
-      queryParts.push(`grade=${encodeURIComponent(params.grade)}`);
+      queryParts.push(`grade=${params.grade}`);
     }
-    if (params.credits) {
-      queryParts.push(`credits=${encodeURIComponent(params.credits)}`);
+    if (params.credit) {
+      queryParts.push(`credits=${params.credit}`);
     }
     if (params.courseTypes) {
-      queryParts.push(`courseTypes=${encodeURIComponent(params.courseTypes)}`);
+      queryParts.push(`courseTypes=${params.courseTypes}`);
     }
     if (params.times) {
-      queryParts.push(`times=${encodeURIComponent(params.times)}`);
+      queryParts.push(`times=${params.times}`); 
     }
 
     // 쿼리 문자열 추가
@@ -183,10 +182,14 @@ export const fetchFilteredCourses = async (
   params: { [key: string]: string }
 ): Promise<CourseData[]> => {
   try {
-    const response = await fetchCourseData(params); // 이미 CourseData[] 반환
+     // 디버깅 로그 추가
+     console.log("[fetchFilteredCourses] Received Parameters:", params);
+    const response = await fetchCourseData(params); 
+     // API 응답 로그 추가
+     console.log("[fetchFilteredCourses] API Response:", response);
     return response;
   } catch (error) {
     console.error("Error fetching filtered courses:", error);
-    return []; // 빈 배열 반환
+    return [];
   }
 };
