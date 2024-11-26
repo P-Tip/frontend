@@ -18,7 +18,7 @@ const Lesson = () => {
 
   const updateTodayMemos = () => {
     const today = getTodayDate();
-    const filteredMemos = filterTodayAllMemos(today);
+    const filteredMemos = filterTodayAllMemos();
     setTodayMemos(filteredMemos);
   };
 

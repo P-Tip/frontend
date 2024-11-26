@@ -50,7 +50,7 @@ const AllMemos = ({ schedule, onClose }: AllMemosProps) => {
     const thisWeek = getWeekDates(0);
     const nextWeek = getWeekDates(1);
 
-    setTodayMemos(filterTodayAllMemos(today));
+    setTodayMemos(filterTodayAllMemos());
     setThisWeekMemos(filterMemosByWeekAll(thisWeek.startDate, thisWeek.endDate));
     setNextWeekMemos(filterMemosByWeekAll(nextWeek.startDate, nextWeek.endDate));
   };
