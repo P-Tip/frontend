@@ -1,0 +1,79 @@
+
+.all-memos-section h4{
+  margin:0.4rem;
+}
+.all-memos-header h3{
+  margin: 0.5rem;
+}
+.memo-list p {
+  margin: 0.7rem;
+}
+.all-memos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-left {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.complete-button {
+  background-color: #a3d3c3;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  background-color: green;
+  color:white;
+}
+
+.complete-button:hover {
+  background-color: #8abfa7;
+}
+
+.all-memos-section {
+  border-bottom: 1px solid green;
+}
+
+.memo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.memo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.memo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.memo-title {
+  font-size: 16px;
+}
+
+.memo-time {
+  font-size: 14px;
+  color: #888;
+}
+
+.add-memo-section {
+  text-align: start;
+  bottom: 20px;
+  background: #fff;
+  padding-top:10px
+}
+
+.add-memo-button:hover {
+  background-color: #8abfa7;
+}

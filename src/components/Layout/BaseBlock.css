@@ -7,7 +7,9 @@
 .price-min,
 .price-max,
 .department-item,
-.lesson-list
+.lesson-list,
+.all-memos-page,
+.dropdown-item
 {
   width: 100%;
   background-color: #ffffff;
@@ -91,4 +93,24 @@
   margin-top: 1rem;
   border-radius:10px;
   aspect-ratio: 280/450;
+}
+.all-memos-page {
+  height:100%;
+  max-width: 800px;
+  
+  border-radius: 15px;
+}
+.dropdown-item {
+  display: flex; /* 한 줄 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: space-between; /* 양쪽 끝으로 정렬 */
+  flex-direction: row;
+  padding: 5px 15px; /* 내부 여백 */
+  border-radius: 10px; /* 둥근 모서리 */
+  cursor: pointer;
+  background-color: white; /* 배경색 */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+  margin: 5px 0; /* 위아래 여백 */
+  font-size: 0.9rem; /* 글씨 크기 */
+  line-height: 1.8; /* 줄 간격 */
 }

@@ -70,10 +70,15 @@
   white-space: nowrap;
 }
 
+/* 빈 셀 */
+.empty-cell {
+  background-color: #f8f8f8;
+  box-shadow: 2px 4px 4px rgba(0, 0.1, 0.1, 0.15);
+}
 /* 병합된 셀 */
 .block-content {
   width: 100%;
-  padding: 0.2rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,12 +86,85 @@
   text-align: center;
   background-color: #a3d3c3;
   border-radius: 0.5rem;
-  /* gridRow를 추가하여 병합된 셀 높이를 설정 */
-  grid-row: span 3; /* 이 값은 동적으로 계산될 수 있음, rowSpan 값에 따라 달라짐 */
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* 빈 셀 */
-.empty-cell {
+/* 병합된 블록 (나머지 셀) */
+.block-placeholder {
+  background-color: #a3d3c3;
+  border-top: 1px solid #a3d3c3; /* 연결된 느낌을 주기 위해 같은 색상 사용 */
+  border-bottom: 1px solid #a3d3c3;
+}
+
+.memo-container {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
   background-color: #f8f8f8;
-  box-shadow: 2px 4px 4px rgba(0, 0.1, 0.1, 0.15);
+  gap:10px
+}
+.memo-container h3{
+  margin:5px;
+}
+.memo-buttons {
+  display: flex;
+  justify-content: space-between; /* 왼쪽과 오른쪽에 배치 */
+}
+/* 메모 리스트 */
+.memo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 개별 메모 아이템 */
+.memo-item {
+  display: flex;
+  justify-content: space-between; /* 왼쪽과 오른쪽에 배치 */
+  align-items: center;
+  
+ 
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* 메모 타이틀 */
+.memo-item-title {
+  font-weight: bold;
+  flex: 1; /* 왼쪽을 차지 */
+  text-align: left;
+  overflow: hidden; /* 텍스트 넘칠 경우 처리 */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 메모 시간 */
+.memo-item-time {
+  flex: 0 0 auto; /* 고정 크기 */
+  color: #666;
+  font-size: 0.85rem;
+  text-align: right;
+}
+.lesson-add-memo-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color:green;
+  background-color:#f8f8f8;
+  border:none;
+}
+.view-all-memo-button{
+  border-radius:8px;
+  border-color: #f8f8f8;
+  background-color: green;
+  color:white;
 }

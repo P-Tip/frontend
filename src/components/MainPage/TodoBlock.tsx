@@ -34,7 +34,7 @@ const TodoBlock: React.FC = () => (
         <LessonBlock/>
       </div>
     </div>
-    <div className="memo-container">
+    <div className="main-memo-container">
       <MemoBlock />
     </div>
   </div>

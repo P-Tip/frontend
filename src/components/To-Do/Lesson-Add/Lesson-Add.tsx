@@ -6,7 +6,7 @@ import MajorAreaPopup from "./MajorAreaPopup";
 import GradePopup from "./GradePopup";
 import CourseTypePopup from "./CourseTypePopup";
 import CourseTimePopup from "./CourseTimePopup";
-import CreditPopup from "./CreditPopup"; // 학점 팝업 추가
+import CreditPopup from "./CreditPopup"; 
 import { fetchFilteredCourses, CourseData } from "../../../utils/api/api";
 import { mapFiltersToParams, Filters, initializeFilters } from "../../../utils/filterUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

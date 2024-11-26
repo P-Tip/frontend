@@ -1,0 +1,157 @@
+.memo-add-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 90%;
+  background: white;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.memo-add-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.memo-add-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+.arrow-container {
+  cursor: pointer;
+}
+
+.close-arrow {
+  font-size: 1.5rem;
+  color: #888;
+}
+
+.memo-add-complete {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 15px;
+}
+
+
+.dropdown-categories {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.dropdown-category {
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.dropdown-header {
+  display: flex; /* 요소를 한 줄로 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: space-between; /* 양쪽 끝 정렬 */
+  padding: 8px 12px; /* 내부 여백 */
+  cursor: pointer; /* 클릭 가능한 커서 */
+}
+
+.dropdown-header-text {
+  flex: 0 0 auto; /* 고정 크기: 가장 왼쪽 */
+  font-weight: bold; /* 글씨 굵게 */
+  margin-right: auto; /* 오른쪽으로 여백을 밀어줌 */
+}
+
+.dropdown-selected-item {
+  flex: 1 1 auto; /* 중간 공간 차지: 가운데 정렬 */
+  text-align: center; /* 가운데 텍스트 정렬 */
+  font-size: 0.9rem; /* 글씨 크기 조정 */
+  color: #333; /* 기본 텍스트 색상 */
+  font-weight: 800;
+}
+
+.dropdown-icon {
+  flex: 0 0 auto; /* 고정 크기: 가장 오른쪽 */
+  font-size: 1.2rem; /* 아이콘 크기 */
+  color: #007b5e; /* 아이콘 색상 */
+}
+
+.dropdown-options {
+  background-color: #f0f0f0;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-left: 6px; /* 간격 조정 */
+  margin-right: 6px; /* 간격 조정 */
+  border-radius: 5px;
+  padding: 8px; /* 내부 여백 */
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: 6px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item:hover {
+  background-color: #f9f9f9; /* 마우스 오버 시 색상 변화 */
+}
+
+.dropdown-item-header {
+  font-weight: bold; /* 제목은 굵게 */
+  font-size: 0.9rem;
+  margin-right: 10px; /* 오른쪽 여백 */
+}
+
+.dropdown-item-header span {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #666;
+}
+
+.dropdown-item-details {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.date-picker,
+.time-picker {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.memo-textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.add-memo-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color:green;
+  background-color:#ffffff;
+  border:none;
+}
