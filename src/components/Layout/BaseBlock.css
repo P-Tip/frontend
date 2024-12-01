@@ -32,6 +32,7 @@
   aspect-ratio: 280 / 280; /* 직사각형 위젯의 비율 고정 */
   padding-right: 10px; /* 오른쪽 패딩 명시적으로 설정 */
   border-radius: 10px;
+  display:block;
 }
 
 .block-search{

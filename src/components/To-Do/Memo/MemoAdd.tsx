@@ -79,7 +79,7 @@ const MemoAdd = ({
 
         {/* 완료 버튼 */}
         <div className="memo-add-complete">
-          <button onClick={handleAddMemo} className="add-memo-button">
+          <button onClick={handleAddMemo} className="complete-button">
             완료
           </button>
         </div>

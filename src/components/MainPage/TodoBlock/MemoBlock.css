@@ -9,11 +9,12 @@
   .main-memo-header {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    
+    height:6%;
   }
   
   .main-memo-header h3 {
-    font-size: 1rem;
+    font-size: 0.6rem;
     font-weight: bold;
     color: #333;
     margin-right: 8px;
@@ -32,10 +33,10 @@
     align-items: center;
     background-color: #e0e0e0;
     border-radius: 8px;
-    padding: 8px;
     margin-bottom: 5px;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height:4%;
   }
   
   .main-memo-item-left {
@@ -59,7 +60,6 @@
     text-align: right;
     color: #999;
   }
-  .main-memo-items{
-    display: flex;
-    align-items: center;
+  .main-memo-items {
+    margin:8px;
   }

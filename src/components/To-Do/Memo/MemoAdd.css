@@ -39,7 +39,9 @@
 .memo-add-complete {
   display: flex;
   justify-content: flex-end;
-  padding: 10px 15px;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 

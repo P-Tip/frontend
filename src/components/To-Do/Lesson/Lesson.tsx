@@ -4,49 +4,80 @@ import LessonAdd from "../Lesson-Add/Lesson-Add";
 import AllMemos from "../Memo/AllMemos";
 import MemoAdd from "../Memo/MemoAdd";
 import { parseCourseTime, ScheduleBlock } from "../../../utils/parse_course_time";
-import { filterTodayAllMemos, removeExpiredMemos } from "../../../utils/memo_utils"; // 삭제 함수 추가
-import { getScheduleFromStorage, saveScheduleToStorage } from "../../../utils/schedule_utils";
+import {
+  filterTodayAllMemos,
+  removeExpiredMemos,
+} from "../../../utils/memo_utils";
+import {
+  getScheduleFromStorage,
+  saveScheduleToStorage,
+  removeBlockFromStorage,
+} from "../../../utils/schedule_utils";
+import { renderTimetable } from "../../../utils/lesson_render_utils";
 
 const Lesson = () => {
   const [isAddPopupVisible, setIsAddPopupVisible] = useState(false);
   const [isMemoAddVisible, setIsMemoAddVisible] = useState(false);
-  const [isAllMemosPage, setIsAllMemosPage] = useState(false); // 전체 메모 페이지 상태
+  const [isAllMemosPage, setIsAllMemosPage] = useState(false);
   const [todayMemos, setTodayMemos] = useState<{ title: string; time: string }[]>([]);
   const [schedule, setSchedule] = useState<ScheduleBlock[]>([]);
 
-  const getTodayDate = () => new Date().toISOString().split("T")[0];
-
+  // Today memos 업데이트
   const updateTodayMemos = () => {
-    const today = getTodayDate();
     const filteredMemos = filterTodayAllMemos();
+    console.log("[DEBUG] Filtered today memos:", filteredMemos);
     setTodayMemos(filteredMemos);
   };
 
+  // 초기 데이터 로드
   useEffect(() => {
+    console.log("[DEBUG] useEffect triggered - Initial data loading");
+
+    // 메모 업데이트
     updateTodayMemos();
+
+    // 스케줄 데이터 로드
     const storedSchedule = getScheduleFromStorage();
+    console.log("[DEBUG] Stored schedule loaded from localStorage:", storedSchedule);
     setSchedule(storedSchedule);
 
-    // 1분마다 기한이 지난 메모 삭제
+    // 만료된 메모 제거
     const intervalId = setInterval(() => {
-      removeExpiredMemos(); // 삭제 함수 실행
-      updateTodayMemos(); // 메모 상태 업데이트
-    }, 60000); // 1분 간격 실행
+      removeExpiredMemos();
+      updateTodayMemos();
+    }, 60000);
 
-    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 클리어
+    return () => clearInterval(intervalId);
   }, []);
 
-  const openAddPopup = () => setIsAddPopupVisible(true);
-  const closeAddPopup = () => setIsAddPopupVisible(false);
+  // 스케줄 추가 팝업 열기/닫기
+  const openAddPopup = () => {
+    console.log("[DEBUG] Add popup opened");
+    setIsAddPopupVisible(true);
+  };
+  const closeAddPopup = () => {
+    console.log("[DEBUG] Add popup closed");
+    setIsAddPopupVisible(false);
+  };
 
-  const openMemoAdd = () => setIsMemoAddVisible(true);
+  // 메모 추가 팝업 열기/닫기
+  const openMemoAdd = () => {
+    console.log("[DEBUG] Memo add popup opened");
+    setIsMemoAddVisible(true);
+  };
   const closeMemoAdd = () => {
+    console.log("[DEBUG] Memo add popup closed");
     setIsMemoAddVisible(false);
     updateTodayMemos();
   };
 
-  const openAllMemosPage = () => setIsAllMemosPage(true); // 전체 메모 페이지로 이동
+  // 전체 메모 페이지 열기
+  const openAllMemosPage = () => {
+    console.log("[DEBUG] All memos page opened");
+    setIsAllMemosPage(true);
+  };
 
+  // 스케줄에 강의 추가
   const handleAddToSchedule = (course: {
     course_no: string;
     title: string;
@@ -54,65 +85,49 @@ const Lesson = () => {
     course_time: string;
     classroom: string;
   }) => {
-    const blocks = parseCourseTime(
+    const newBlocks = parseCourseTime(
       course.course_time,
       course.course_no,
       course.title,
       course.professor,
       course.classroom
     );
+    console.log("[DEBUG] New course blocks parsed:", newBlocks);
 
     setSchedule((prev) => {
-      const updatedSchedule = [...prev];
-      blocks.forEach((newBlock) => {
-        const exists = updatedSchedule.some(
-          (b) => b.day === newBlock.day && b.time === newBlock.time
-        );
-        if (!exists) {
-          updatedSchedule.push(newBlock);
-        }
-      });
-
+      const updatedSchedule = [...prev, ...newBlocks];
+      console.log("[DEBUG] Updated schedule to save:", updatedSchedule);
       saveScheduleToStorage(updatedSchedule);
       return updatedSchedule;
     });
   };
 
-  const renderCellContent = (row: number, col: number) => {
-    const block = schedule.find((b) => b.day === col && b.time === row);
+  // 스케줄에서 블록 삭제
+  const handleBlockDoubleClick = (block: ScheduleBlock) => {
+    console.log("[DEBUG] Block double-clicked for deletion:", block);
 
-    if (block) {
-      const relatedBlocks = schedule.filter(
-        (b) => b.day === col && b.course_no === block.course_no
+    setSchedule((prev) => {
+      const updatedSchedule = prev.filter(
+        (b) =>
+          b.course_no !== block.course_no ||
+          b.day !== block.day ||
+          b.time !== block.time
       );
-      const rowSpan = relatedBlocks.length;
-
-      if (block.time === row) {
-        return (
-          <div
-            className="block-content"
-            style={{ gridRow: `span ${rowSpan}`, backgroundColor: "#a3d3c3" }}
-          >
-            <h3>{block.title}</h3>
-            <p>{block.professor}</p>
-            <p>{block.course_time}</p>
-            <p>{block.classroom}</p>
-          </div>
-        );
-      }
-      return <div className="block-placeholder" style={{ gridRow: `span 1` }} />;
-    }
-
-    return <div className="empty-cell"></div>;
+      console.log("[DEBUG] Updated schedule after deletion:", updatedSchedule);
+      removeBlockFromStorage(block);
+      return updatedSchedule;
+    });
   };
 
-  // 전체 메모 페이지 상태일 경우 AllMemos 컴포넌트 렌더링
+  // 전체 메모 페이지 렌더링
   if (isAllMemosPage) {
+    console.log("[DEBUG] Rendering AllMemos page");
     return <AllMemos schedule={schedule} onClose={() => setIsAllMemosPage(false)} />;
   }
-  
 
-  // 기본 Lesson UI 렌더링
+  // Lesson 페이지 렌더링
+  console.log("[DEBUG] Rendering Lesson page with schedule:", schedule);
+
   return (
     <div className="lesson-page">
       <div className="lesson-list">
@@ -122,43 +137,33 @@ const Lesson = () => {
             +
           </button>
         </div>
-
         <div className="schedule-container">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((row) => (
-            <React.Fragment key={`row-${row}`}>
-              <div className="time-column">{row}</div>
-              {[1, 2, 3, 4, 5].map((col) => (
-                <div key={`cell-${row}-${col}`} className="cell">
-                  {renderCellContent(row, col)}
-                </div>
-              ))}
-            </React.Fragment>
-          ))}
+          {renderTimetable(schedule, handleBlockDoubleClick)}
         </div>
 
         <div className="memo-container">
-  <h3>오늘</h3>
-  <ul className="memo-list">
-    {todayMemos.length > 0 ? (
-      todayMemos.map((memo, index) => (
-        <li key={index} className="memo-item">
-          <span className="memo-item-title">{memo.title}</span>
-          <span className="memo-item-time">{memo.time}</span>
-        </li>
-      ))
-    ) : (
-      <li className="no-memo">오늘의 메모가 없습니다.</li>
-    )}
-  </ul>
-  <div className="memo-buttons">
-    <button className="lesson-add-memo-button" onClick={openMemoAdd}>
-      메모 추가
-    </button>
-    <button className="view-all-memo-button" onClick={openAllMemosPage}>
-      전체 메모
-    </button>
-  </div>
-</div>
+          <h3>오늘</h3>
+          <ul className="memo-list">
+            {todayMemos.length > 0 ? (
+              todayMemos.map((memo, index) => (
+                <li key={index} className="memo-item">
+                  <span className="memo-item-title">{memo.title}</span>
+                  <span className="memo-item-time">{memo.time}</span>
+                </li>
+              ))
+            ) : (
+              <li className="no-memo">오늘의 메모가 없습니다.</li>
+            )}
+          </ul>
+          <div className="memo-buttons">
+            <button className="lesson-add-memo-button" onClick={openMemoAdd}>
+              메모 추가
+            </button>
+            <button className="view-all-memo-button" onClick={openAllMemosPage}>
+              전체 메모
+            </button>
+          </div>
+        </div>
       </div>
 
       {isAddPopupVisible && (

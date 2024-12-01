@@ -52,7 +52,7 @@ const MemoBlock = () => {
         <h3>이번주</h3>
         <div className="line"></div>
       </div>
-      <ul>
+      <ul className="main-memo-items">
         {thisWeekMemos.length > 0 ? (
           thisWeekMemos.map((memo, index) => (
             <li key={index} className="main-memo-item">
@@ -75,7 +75,7 @@ const MemoBlock = () => {
         <h3>다음주</h3>
         <div className="line"></div>
       </div>
-      <ul>
+      <ul className="main-memo-items">
         {nextWeekMemos.length > 0 ? (
           nextWeekMemos.map((memo, index) => (
             <li key={index} className="main-memo-item">

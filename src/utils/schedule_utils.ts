@@ -1,5 +1,5 @@
 import { ScheduleBlock } from "../utils/parse_course_time";
-// 로컬스토리지 키
+
 const SCHEDULE_STORAGE_KEY = "scheduleData";
 
 /**
@@ -15,4 +15,16 @@ export const getScheduleFromStorage = (): ScheduleBlock[] => {
  */
 export const saveScheduleToStorage = (schedule: ScheduleBlock[]): void => {
   localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(schedule));
+};
+
+/**
+ * 로컬스토리지에서 특정 블록 삭제
+ */
+export const removeBlockFromStorage = (block: ScheduleBlock): void => {
+  const schedule = getScheduleFromStorage();
+  const updatedSchedule = schedule.filter(
+    (b) => b.course_no !== block.course_no || b.day !== block.day || b.time !== block.time
+  );
+  saveScheduleToStorage(updatedSchedule);
+  console.log("[DEBUG] Removed block from storage:", block);
 };
